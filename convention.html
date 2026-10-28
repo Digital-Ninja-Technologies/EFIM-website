@@ -162,6 +162,55 @@ section.band{padding-block:clamp(72px,11vw,140px)}
 .pin svg circle{fill:var(--night)}
 @media (max-width:900px){.venue{grid-template-columns:1fr}.pin{max-width:260px}}
 
+/* registration */
+.reg{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,4vw,64px);align-items:start}
+.reg h2{font-size:clamp(2.4rem,6vw,4.8rem);font-weight:800;margin-top:16px}
+.reg .lead{color:var(--mute);max-width:40ch;margin:20px 0 0}
+.steps{list-style:none;margin:32px 0 0;padding:0;counter-reset:s;border-top:1px solid var(--line)}
+.steps li{counter-increment:s;display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;padding:16px 0;border-bottom:1px solid var(--line);color:var(--mute);font-size:.95rem}
+.steps li::before{content:"0" counter(s);font-family:var(--f-mono);font-size:.78rem;color:var(--lamp);letter-spacing:.1em;padding-top:2px}
+.steps li b{display:block;color:var(--ink);font-family:var(--f-display);font-weight:600;font-size:1.1rem}
+.rcard{position:relative;border:1px solid var(--line);border-radius:28px;padding:clamp(22px,4vw,40px);background:radial-gradient(520px circle at var(--mx,0%) var(--my,0%),rgba(20,178,90,.2),transparent 60%),var(--night);overflow:hidden}
+.rgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.fld{display:flex;flex-direction:column;gap:7px;min-width:0}
+.fld.full{grid-column:1/-1}
+.fld>label,.fld>legend{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--lamp);padding:0}
+fieldset.fld{border:0;margin:0;padding:0}
+.fld input[type=text],.fld input[type=tel],.fld input[type=email],.fld select{font:inherit;color:var(--ink);background:var(--deep);border:1px solid var(--line);border-radius:14px;padding:14px 16px;width:100%;transition:border-color .25s,box-shadow .25s}
+.fld input::placeholder{color:#5d6485}
+.fld input:focus,.fld select:focus{outline:none;border-color:var(--lamp);box-shadow:0 0 0 4px rgba(255,178,62,.15)}
+.fld.bad input,.fld.bad select{border-color:var(--red)}
+.fld .err{min-height:1.1em;font-size:.78rem;color:#ff8a8d}
+.chips{display:flex;gap:10px;flex-wrap:wrap}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.chip span{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:10px 18px;font-weight:700;font-size:.9rem;color:var(--mute);transition:all .25s;user-select:none}
+.chip span::before{content:"";width:9px;height:9px;border-radius:50%;border:1px solid currentColor;transition:all .25s}
+.chip input:checked+span{background:var(--ink);color:var(--night);border-color:var(--ink)}
+.chip input:checked+span::before{background:var(--green);border-color:var(--green);box-shadow:0 0 10px var(--green)}
+.chip input:focus-visible+span{outline:2px solid var(--lamp);outline-offset:3px}
+.step-n{display:flex;align-items:center;gap:14px}
+.step-n button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--deep);color:var(--ink);font:inherit;font-size:1.3rem;cursor:pointer;transition:border-color .25s,background .25s}
+.step-n button:hover{border-color:var(--lamp);background:rgba(255,178,62,.1)}
+.step-n output{min-width:2ch;text-align:center;font-family:var(--f-display);font-size:1.8rem;font-weight:800;font-variant-numeric:tabular-nums}
+.rfoot{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:26px}
+.rfoot small{color:var(--mute);font-size:.8rem;max-width:34ch}
+.ticket{display:none;position:relative}
+.rcard.done form{display:none}
+.rcard.done .ticket{display:block}
+.tk{border:1px dashed var(--lamp);border-radius:22px;padding:clamp(22px,4vw,34px);background:linear-gradient(160deg,rgba(255,178,62,.14),rgba(20,178,90,.14)),var(--deep);position:relative;overflow:hidden}
+.tk::before,.tk::after{content:"";position:absolute;top:58%;width:26px;height:26px;border-radius:50%;background:var(--night);border:1px dashed var(--lamp)}
+.tk::before{left:-14px}.tk::after{right:-14px}
+.tk h3{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;margin-top:12px}
+.tk dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:26px 0 0}
+.tk dt{font-family:var(--f-mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--lamp)}
+.tk dd{margin:4px 0 0;font-family:var(--f-display);font-size:1.1rem;font-weight:600;overflow-wrap:anywhere}
+.tk .ref{font-family:var(--f-mono);letter-spacing:.2em}
+.tk .note{margin:22px 0 0;color:var(--mute);font-size:.85rem}
+.ticket .btn{margin-top:20px}
+@media (max-width:900px){.reg{grid-template-columns:1fr}}
+@media (max-width:560px){.rgrid,.tk dl{grid-template-columns:1fr}}
+
 /* closing call */
 .close{text-align:center}
 .close h2{font-size:clamp(2.4rem,7vw,6rem);font-weight:800;max-width:16ch;margin-inline:auto}
@@ -213,7 +262,7 @@ dialog#lb button:hover{border-color:var(--lamp);color:var(--lamp)}
       <li><a href="convention.html" aria-current="page">Convention</a></li>
       <li><a href="index.html#pray">Prayer</a></li>
     </ul>
-    <a class="btn btn-lamp" href="#venue">Get directions <span class="arr">→</span></a>
+    <a class="btn btn-lamp" href="#register">Register <span class="arr">→</span></a>
   </div>
 </header>
 
@@ -240,7 +289,8 @@ dialog#lb button:hover{border-color:var(--lamp);color:var(--lamp)}
           <p>Counting to Friday 20 November 2026. Daily start times <span class="tbc">TBC</span></p>
         </div>
         <div class="ctas">
-          <a class="btn btn-lamp" href="#venue">Get directions <span class="arr">→</span></a>
+          <a class="btn btn-lamp" href="#register">Register now <span class="arr">→</span></a>
+          <a class="btn btn-ghost" href="#venue">Get directions</a>
           <button class="btn btn-ghost" id="addCal" type="button">Add to calendar</button>
         </div>
       </div>
@@ -304,12 +354,50 @@ dialog#lb button:hover{border-color:var(--lamp);color:var(--lamp)}
     </div>
   </section>
 
+  <section class="band" id="register">
+    <div class="wrap reg">
+      <div class="rv">
+        <div class="eyebrow">Registration</div>
+        <h2>Save your <em class="s">seat</em></h2>
+        <p class="lead">Let us know you are coming to the 2026 National Convention so we can prepare for you, your family and your friends.</p>
+        <ol class="steps">
+          <li><div><b>Tell us who is coming</b>Your details and how many will attend.</div></li>
+          <li><div><b>Choose your days</b>Come for one day or all three, Friday to Sunday.</div></li>
+          <li><div><b>Get your reference</b>Keep it handy and show it at the door.</div></li>
+        </ol>
+      </div>
+      <div class="rcard rv" id="rcard" style="--d:.12s">
+        <form id="regForm" novalidate>
+          <div class="rgrid">
+            <div class="fld"><label for="rName">Full name</label><input id="rName" name="name" type="text" autocomplete="name" placeholder="Your name" required><span class="err" aria-live="polite"></span></div>
+            <div class="fld"><label for="rPhone">Phone</label><input id="rPhone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="080 0000 0000" required><span class="err" aria-live="polite"></span></div>
+            <div class="fld"><label for="rEmail">Email <span style="color:var(--mute);text-transform:none;letter-spacing:0">(optional)</span></label><input id="rEmail" name="email" type="email" autocomplete="email" placeholder="you@example.com"><span class="err" aria-live="polite"></span></div>
+            <div class="fld"><label for="rBranch">Your branch</label><select id="rBranch" name="branch" required><option value="">Choose a branch</option><option>Lagos</option><option>Ibadan</option><option>Delta</option><option>Abeokuta</option><option>Visiting from elsewhere</option></select><span class="err" aria-live="polite"></span></div>
+            <fieldset class="fld full"><legend>Days you will attend</legend>
+              <div class="chips"><label class="chip"><input type="checkbox" name="day" value="Fri 20 Nov" checked><span>Fri 20</span></label><label class="chip"><input type="checkbox" name="day" value="Sat 21 Nov" checked><span>Sat 21</span></label><label class="chip"><input type="checkbox" name="day" value="Sun 22 Nov" checked><span>Sun 22</span></label></div><span class="err" id="dayErr" aria-live="polite"></span></fieldset>
+            <div class="fld"><span class="fld-l" id="gl" style="font-family:var(--f-mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--lamp)">People attending</span>
+              <div class="step-n" role="group" aria-labelledby="gl"><button type="button" id="gMinus" aria-label="One fewer person">−</button><output id="gOut" aria-live="polite">1</output><button type="button" id="gPlus" aria-label="One more person">+</button></div></div>
+            <fieldset class="fld"><legend>First time with us?</legend>
+              <div class="chips"><label class="chip"><input type="radio" name="first" value="Yes"><span>Yes</span></label><label class="chip"><input type="radio" name="first" value="No" checked><span>No</span></label></div></fieldset>
+          </div>
+          <div class="rfoot"><button class="btn btn-lamp" type="submit">Register <span class="arr">→</span></button><small>Demo form: details are not saved or sent anywhere until the church connects it to their registration inbox.</small></div>
+        </form>
+        <div class="ticket" id="ticket" aria-live="polite" tabindex="-1">
+          <div class="tk"><div class="eyebrow">You are on the list</div><h3 id="tkName">See you there</h3>
+            <dl><div><dt>Reference</dt><dd class="ref" id="tkRef">-</dd></div><div><dt>Branch</dt><dd id="tkBranch">-</dd></div><div><dt>Days</dt><dd id="tkDays">-</dd></div><div><dt>People</dt><dd id="tkPeople">-</dd></div></dl>
+            <p class="note">Faith Plaza, CM Bariga Road, opp. Dada Street, Bariga Road, Lagos. Demo reference only, nothing has been submitted yet.</p></div>
+          <button class="btn btn-ghost" id="rAgain" type="button">Register someone else</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="band close">
     <div class="wrap rv">
       <div class="eyebrow">You are invited</div>
       <h2 style="margin-top:18px">Come and see <em class="s">new things</em></h2>
       <p>Join us at the 2026 National Convention. Invite someone you love to come with you.</p>
-      <div class="ctas"><button class="btn btn-lamp" id="shareBtn" type="button">Share this invite <span class="arr">→</span></button><a class="btn btn-ghost" href="index.html#pray">Send a prayer request</a></div>
+      <div class="ctas"><a class="btn btn-lamp" href="#register">Register now <span class="arr">→</span></a><button class="btn btn-ghost" id="shareBtn" type="button">Share this invite</button><a class="btn btn-ghost" href="index.html#pray">Send a prayer request</a></div>
     </div>
   </section>
 </main>
@@ -356,7 +444,7 @@ document.getElementById('addCal').addEventListener('click',()=>{
 /* share */
 document.getElementById('shareBtn').addEventListener('click',async e=>{
   const data={title:'2026 National Convention: New Things By His Spirit',text:'Join us Fri 20 – Sun 22 Nov 2026 at Faith Plaza, Bariga, Lagos.',url:location.href};
-  try{if(navigator.share){await navigator.share(data);return;}await navigator.clipboard.writeText(data.url);e.currentTarget.firstChild.textContent='Link copied ';}catch(_){}
+  try{if(navigator.share){await navigator.share(data);return;}await navigator.clipboard.writeText(data.url);e.currentTarget.textContent='Link copied';}catch(_){}
 });
 
 /* flier lightbox */
@@ -364,6 +452,41 @@ const lb=document.getElementById('lb');
 document.getElementById('flierBtn').addEventListener('click',()=>lb.showModal&&lb.showModal());
 document.getElementById('lbClose').addEventListener('click',()=>lb.close());
 lb.addEventListener('click',e=>{if(e.target===lb)lb.close();});
+
+/* registration (demo: nothing is sent anywhere yet) */
+(function(){
+  const form=document.getElementById('regForm'),card=document.getElementById('rcard'),tk=document.getElementById('ticket');
+  const out=document.getElementById('gOut');let n=1;
+  const bump=()=>{out.textContent=n;if(G&&!reduce)G.fromTo(out,{scale:1.35},{scale:1,duration:.35,ease:'back.out(3)'});};
+  document.getElementById('gMinus').addEventListener('click',()=>{n=Math.max(1,n-1);bump();});
+  document.getElementById('gPlus').addEventListener('click',()=>{n=Math.min(20,n+1);bump();});
+  const setErr=(el,msg)=>{const f=el.closest('.fld');f.classList.toggle('bad',!!msg);f.querySelector('.err').textContent=msg||'';};
+  const checks={
+    rName:v=>v.trim().length<2?'Please enter your name.':'',
+    rPhone:v=>v.replace(/\D/g,'').length<7?'Please enter a phone number we can reach.':'',
+    rEmail:v=>v&&!/^\S+@\S+\.\S+$/.test(v)?'That email does not look right.':'',
+    rBranch:v=>!v?'Please choose a branch.':''
+  };
+  Object.keys(checks).forEach(id=>{const el=document.getElementById(id);el.addEventListener('blur',()=>setErr(el,checks[id](el.value)));el.addEventListener('input',()=>{if(el.closest('.fld').classList.contains('bad'))setErr(el,checks[id](el.value));});});
+  form.addEventListener('submit',e=>{
+    e.preventDefault();let bad=null;
+    Object.keys(checks).forEach(id=>{const el=document.getElementById(id);const m=checks[id](el.value);setErr(el,m);if(m&&!bad)bad=el;});
+    const days=[...form.querySelectorAll('input[name=day]:checked')].map(i=>i.value);
+    document.getElementById('dayErr').textContent=days.length?'':'Choose at least one day.';
+    if(!days.length&&!bad)bad=form.querySelector('input[name=day]');
+    if(bad){bad.focus();return;}
+    const ref='NT26-'+Array.from({length:5},()=>'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'[Math.floor(Math.random()*32)]).join('');
+    document.getElementById('tkName').textContent='See you there, '+document.getElementById('rName').value.trim().split(/\s+/)[0];
+    document.getElementById('tkRef').textContent=ref;
+    document.getElementById('tkBranch').textContent=form.branch.value;
+    document.getElementById('tkDays').textContent=days.map(d=>d.replace(' Nov','')).join(' · ');
+    document.getElementById('tkPeople').textContent=n+(n===1?' person':' people')+(form.first.value==='Yes'?' · first time':'');
+    card.classList.add('done');tk.focus({preventScroll:true});
+    if(G&&!reduce){G.from('.tk',{y:40,rotate:-3,opacity:0,duration:.9,ease:'back.out(1.6)'});G.from('.tk dl>div,.tk .note,#rAgain',{y:16,opacity:0,duration:.5,stagger:.08,delay:.35,ease:'power3.out'});}
+  });
+  document.getElementById('rAgain').addEventListener('click',()=>{form.reset();n=1;out.textContent=1;card.classList.remove('done');document.getElementById('rName').focus();});
+  card.addEventListener('pointermove',e=>{const r=card.getBoundingClientRect();card.style.setProperty('--mx',(e.clientX-r.left)+'px');card.style.setProperty('--my',(e.clientY-r.top)+'px');});
+})();
 
 /* scroll progress */
 const bar=document.getElementById('progress');
