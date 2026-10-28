@@ -318,11 +318,13 @@ footer{border-top:1px solid var(--line);padding-block:60px 40px;overflow:hidden}
 
 /* next steps */
 .steps3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-.step{position:relative;display:flex;flex-direction:column;gap:14px;min-height:280px;padding:30px;border-radius:24px;border:1px solid var(--line);text-decoration:none;overflow:hidden;background:var(--deep);transition:border-color .35s}
+.step{position:relative;isolation:isolate;display:flex;flex-direction:column;gap:14px;min-height:380px;padding:30px;border-radius:24px;border:1px solid var(--line);text-decoration:none;overflow:hidden;background:var(--deep);transition:border-color .35s}
 .step:hover{border-color:var(--lamp)}
+.step::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(7,9,20,.72) 0%,rgba(7,9,20,.5) 40%,rgba(7,9,20,.94) 100%),var(--bg) center/cover no-repeat;transform:scale(1.04);transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.step:hover::after{transform:scale(1.12)}
 .step .n{font-family:var(--f-mono);font-size:.75rem;color:var(--lamp);letter-spacing:.12em}
 .step h3{font-size:2rem;font-weight:800;margin-top:auto}
-.step p{margin:0;color:var(--mute);font-size:.95rem}
+.step p{margin:0;color:#c9cee6;font-size:.95rem}
 .step .go-arr{position:absolute;right:26px;top:26px;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;transition:transform .4s,background .4s,color .4s}
 .step:hover .go-arr{transform:rotate(-45deg);background:var(--lamp);color:var(--night);border-color:var(--lamp)}
 .step::before{content:"";position:absolute;inset:auto -20% -60% -20%;height:70%;background:radial-gradient(closest-side,rgba(255,178,62,.18),transparent);transform:translateY(40%);transition:transform .6s}
@@ -594,9 +596,9 @@ html.loading,html.loading body{overflow:hidden}
     <div class="wrap">
       <div class="sec-head"><h2>Your next <em class="s">step</em></h2><p>Three simple ways to move from visitor to family.</p></div>
       <div class="steps3">
-        <a class="step" href="#visit"><span class="go-arr">→</span><span class="n">STEP 1</span><h3>Plan a visit</h3><p>Join a Sunday service and meet the family.</p></a>
-        <a class="step" href="#ministries"><span class="go-arr">→</span><span class="n">STEP 2</span><h3>Join a ministry</h3><p>Use your gifts in the choir, children's church, outreach and more.</p></a>
-        <a class="step" href="#life"><span class="go-arr">→</span><span class="n">STEP 3</span><h3>Start new life</h3><p>Give your life to Jesus and begin the walk of faith.</p></a>
+        <a class="step" href="#visit" style="--bg:url(images/step-visit.webp)"><span class="go-arr">→</span><span class="n">STEP 1</span><h3>Plan a visit</h3><p>Join a Sunday service and meet the family.</p></a>
+        <a class="step" href="#ministries" style="--bg:url(images/step-ministry.webp)"><span class="go-arr">→</span><span class="n">STEP 2</span><h3>Join a ministry</h3><p>Use your gifts in the choir, children's church, outreach and more.</p></a>
+        <a class="step" href="#life" style="--bg:url(images/step-new-life.webp)"><span class="go-arr">→</span><span class="n">STEP 3</span><h3>Start new life</h3><p>Give your life to Jesus and begin the walk of faith.</p></a>
       </div>
     </div>
   </section>
