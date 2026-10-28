@@ -47,8 +47,10 @@ docks.forEach(function(dock){
   size();addEventListener('resize',size);
   if(window.ResizeObserver)new ResizeObserver(size).observe(dock);
 
+  /* a dock marked data-after-loader holds its spin-in until the intro screen has gone */
+  var waitLoader=dock.getAttribute('data-after-loader')==='1',root=document.documentElement;
   var visible=false,t0=0,nx=0,ny=0,px=0,py=0,spin=0,lastS=scrollY,last=performance.now();
-  new IntersectionObserver(function(es){visible=es[0].isIntersecting;if(visible&&!t0)t0=performance.now();},{threshold:.15}).observe(dock);
+  new IntersectionObserver(function(es){visible=es[0].isIntersecting;},{threshold:.15}).observe(dock);
   addEventListener('pointermove',function(e){
     var r=dock.getBoundingClientRect();
     nx=clamp((e.clientX-(r.left+r.width/2))/(innerWidth*.5),-1,1);
@@ -57,6 +59,8 @@ docks.forEach(function(dock){
   (function frame(now){
     requestAnimationFrame(frame);
     if(!visible||document.hidden)return;
+    if(waitLoader&&root.classList.contains('loading')){last=now;return;}
+    if(!t0)t0=now;
     var dt=Math.min(.05,(now-last)/1000);last=now;
     var s=scrollY;spin=clamp(spin+(s-lastS)/Math.max(dt,.001)*.00005,-4,4);lastS=s;spin*=Math.pow(.05,dt);
     var t=(now-t0)/1000;
