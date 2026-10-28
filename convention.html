@@ -236,7 +236,12 @@ fieldset.fld{border:0;margin:0;padding:0}
 .close .ctas{justify-content:center}
 
 /* footer */
-footer{border-top:1px solid var(--line);padding-block:60px 40px;overflow:hidden}
+footer{border-top:1px solid var(--line);padding-block:60px 0;overflow:hidden}
+.credit{border-top:1px solid var(--line);background:var(--night);margin-top:40px}
+.credit .wrap{display:flex;justify-content:center;padding-block:14px}
+.credit p{margin:0;white-space:nowrap;font-size:min(.85rem,3vw);color:var(--mute);text-align:center}
+.credit a{color:var(--lamp);font-weight:700;text-decoration:none;border-bottom:1px solid transparent;transition:border-color .25s,color .25s}
+.credit a:hover{border-bottom-color:var(--lamp);color:var(--ink)}
 .frow{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;color:var(--mute);font-size:.9rem}
 .frow nav{display:flex;gap:18px;flex-wrap:wrap}
 .frow a{text-decoration:none}
@@ -430,6 +435,7 @@ dialog#lb button:hover{border-color:var(--lamp);color:var(--lamp)}
     </div>
     <div class="giant" aria-hidden="true"><span>NEW</span><span>THINGS</span><span>2026</span></div>
   </div>
+<div class="credit"><div class="wrap"><p>Designed &amp; developed by <a href="https://www.thedigitalninjatech.com" target="_blank" rel="noopener">The Digital Ninja Technologies Agency</a></p></div></div>
 </footer>
 
 <dialog id="lb" aria-label="Convention flier"><button type="button" id="lbClose">Close ✕</button><img src="images/convention-flier-2026.webp" alt="Full 2026 National Convention flier"></dialog>
