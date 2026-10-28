@@ -118,7 +118,8 @@ function initScene(){
   })();
 
   /* layout metrics, refreshed on resize / layout shifts */
-  var vw=1,vh=1,w0=300,docCx=0,docCy=0,docTop=0;
+  var dock=document.getElementById('flierDock');
+  var vw=1,vh=1,w0=300,docCx=0,docCy=0,docTop=0,dkCx=0,dkTop=0,dkW=0,dkH=0;
   function measure(){
     vw=innerWidth;vh=innerHeight;
     renderer.setSize(vw,vh,false);
@@ -127,6 +128,7 @@ function initScene(){
     camera.updateProjectionMatrix();
     var r=ph.getBoundingClientRect(),sy=scrollY;
     w0=Math.max(120,r.width);docCx=r.left+r.width/2;docCy=r.top+sy+r.height/2;docTop=r.top+sy;
+    if(dock){var d=dock.getBoundingClientRect();dkW=d.width;dkH=d.height;dkCx=d.left+d.width/2;dkTop=d.top+sy;}
   }
   measure();
   addEventListener('resize',measure);
@@ -158,13 +160,22 @@ function initScene(){
     var targetX=lerp(xStart,xEnd,tx)+Math.sin(s*.004)*16*tSize;
     var yLive=docCy-s,yPin=vh*.52;
     var targetY=Math.max(yLive,yPin)+Math.sin(now/1000*1.3)*7*tSize;
+    /* landing pad: while the pad is near the middle of the screen the flier eases into it and fills it */
+    var dw=0;
+    if(dock&&dkW>0){
+      var dyc=dkTop+dkH/2-s;
+      var dist=Math.abs(dyc-vh*.5)/vh;
+      dw=easeInOut(1-clamp((dist-.1)/.5,0,1));
+      targetX=lerp(targetX,dkCx,dw);targetY=lerp(targetY,dyc,dw);width=lerp(width,dkW,dw);
+    }
     var a=1-Math.pow(.0012,dt);
     if(st.x===null){st.x=targetX;st.y=targetY;st.w=width;}
     st.x=lerp(st.x,targetX,a);st.y=lerp(st.y,targetY,a);st.w=lerp(st.w,width,a);
     px=lerp(px,pnx,.06);py=lerp(py,pny,.06);
-    var yawT=-.3+Math.sin(sp*.0034)*.6*tSize+px*.35+spin+(1-intro)*Math.PI*1.2;
-    var pitchT=-py*.22+Math.sin(sp*.0021)*.1*tSize;
-    var rollT=Math.sin(sp*.002)*.07*tSize;
+    var free=1-dw*.85;
+    var yawT=(-.3+Math.sin(sp*.0034)*.6*tSize+px*.35)*free+spin+(1-intro)*Math.PI*1.2;
+    var pitchT=(-py*.22+Math.sin(sp*.0021)*.1*tSize)*free;
+    var rollT=Math.sin(sp*.002)*.07*tSize*free;
     st.yaw=lerp(st.yaw,yawT,a);st.pitch=lerp(st.pitch,pitchT,a);st.roll=lerp(st.roll,rollT,a);
     pivot.position.set(st.x-vw/2,-(st.y-vh/2),0);
     pivot.scale.setScalar(st.w);

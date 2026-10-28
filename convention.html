@@ -126,6 +126,27 @@ section.band{padding-block:clamp(72px,11vw,140px)}
 .sec-head p{color:var(--mute);max-width:42ch;margin:0}
 .alt{background:var(--deep);border-block:1px solid var(--line)}
 
+/* what you will gain: copy on the left, a landing pad on the right where the 3D flier docks */
+.gain{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(24px,5vw,80px);align-items:center}
+.gain h2{font-size:clamp(2.4rem,6vw,4.8rem);font-weight:800;margin-top:16px}
+.gain .lead{color:var(--mute);max-width:46ch;margin:20px 0 0}
+.gl-list{list-style:none;margin:36px 0 0;padding:0;border-top:1px solid var(--line)}
+.gl-list li{display:grid;grid-template-columns:52px minmax(0,1fr);gap:14px;padding:20px 4px;border-bottom:1px solid var(--line);transition:background .3s,padding .3s}
+.gl-list li:hover{background:rgba(20,178,90,.07);padding-left:14px}
+.gl-list .ic{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--lamp);transition:background .3s,color .3s,border-color .3s,transform .5s}
+.gl-list li:hover .ic{background:var(--lamp);color:var(--night);border-color:var(--lamp);transform:rotate(-12deg) scale(1.08)}
+.gl-list svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.gl-list b{display:block;font-family:var(--f-display);font-weight:600;font-size:1.2rem;line-height:1.2}
+.gl-list span{display:block;color:var(--mute);font-size:.95rem;margin-top:4px}
+.dock{position:relative;width:min(100%,400px);margin-inline:auto;aspect-ratio:863/1080}
+.dock::before{content:"";position:absolute;inset:-22px;border-radius:30px;border:1px dashed rgba(255,178,62,.32);animation:padpulse 3.4s ease-in-out infinite}
+.dock::after{content:"";position:absolute;inset:-40%;z-index:-1;background:radial-gradient(closest-side,rgba(20,178,90,.3),transparent 70%)}
+.dock img{display:block;width:100%;height:100%;object-fit:cover;border-radius:18px;border:1px solid rgba(109,255,156,.35);box-shadow:0 30px 80px rgba(20,178,90,.25)}
+html.gl .dock img{opacity:0}
+@keyframes padpulse{50%{transform:scale(1.025);border-color:rgba(255,178,62,.6)}}
+@media (max-width:900px){.gain{grid-template-columns:1fr}.dock{width:min(70%,320px);margin-top:12px}}
+@media (prefers-reduced-motion:reduce){.dock::before{animation:none}}
+
 /* theme scriptures */
 .verses{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
 .vs{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:26px;padding:clamp(24px,4vw,44px);background:radial-gradient(120% 120% at 0% 0%,rgba(20,178,90,.22),transparent 55%),var(--night);transition:border-color .35s,transform .35s}
@@ -328,6 +349,18 @@ dialog#lb button:hover{border-color:var(--lamp);color:var(--lamp)}
     <span>New things <em>by His Spirit</em></span><span>2026 National <em>Convention</em></span><span>Fri 20 – Sun 22 <em>November</em></span><span>Faith Plaza <em>Bariga, Lagos</em></span>
     <span>New things <em>by His Spirit</em></span><span>2026 National <em>Convention</em></span><span>Fri 20 – Sun 22 <em>November</em></span><span>Faith Plaza <em>Bariga, Lagos</em></span>
   </div></div>
+
+  <section class="band alt" id="gain">
+    <div class="wrap gain">
+      <div>
+        <div class="eyebrow rv">Why you should be there</div>
+        <h2 class="rv">What you will <em class="s">gain</em></h2>
+        <p class="lead rv">Three days set apart for you. Come expecting, and leave with more than you came with.</p>
+        <ul class="gl-list"><li class="rv" style="--d:0.00s"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c1.6 3 4.5 4.8 4.5 8.5a4.5 4.5 0 0 1-9 0c0-2 1-3.2 2-4.2.1 1.6.8 2.4 1.7 2.7C10.8 7.6 11 5.2 12 3z"/><path d="M8 21h8"/></svg></div><div><b>Fresh fire and renewal</b><span>Be refreshed by the Holy Spirit and leave stirred up for the season ahead.</span></div></li><li class="rv" style="--d:0.06s"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></div><div><b>Clarity and direction</b><span>Hear what God is saying for your family, work and purpose in the new things He is doing.</span></div></li><li class="rv" style="--d:0.12s"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v15H5.5C4.7 19 4 18.3 4 17.5z"/><path d="M20 5.5c0-.8-.7-1.5-1.5-1.5H13v15h5.5c.8 0 1.5-.7 1.5-1.5z"/></svg></div><div><b>Teaching that equips</b><span>Receive the Word from Rev. M.G Kafaru and Pst. Moses Oyerinde and carry it home.</span></div></li><li class="rv" style="--d:0.18s"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg></div><div><b>Worship in His presence</b><span>Join thousands in praise led by Kay Wonders and experience the presence of God together.</span></div></li><li class="rv" style="--d:0.24s"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 21v-8l-2-3V7a1.5 1.5 0 0 1 3 0v3m0-5a1.5 1.5 0 0 1 3 0v5m0-4a1.5 1.5 0 0 1 3 0v6m0-3a1.5 1.5 0 0 1 3 0v5c0 3-2 6-5 6H8z"/></svg></div><div><b>Prayer and ministration</b><span>Stand in faith with ministers and fellow believers for breakthrough in your life and home.</span></div></li><li class="rv" style="--d:0.30s"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M15.5 14.2c.5-.1 1-.2 1.5-.2 2.5 0 4 1.8 4 4.5"/></svg></div><div><b>One family, many branches</b><span>Meet believers from Lagos, Ibadan, Delta, Abeokuta and beyond, and build lasting fellowship.</span></div></li></ul>
+      </div>
+      <div class="dock rv" id="flierDock" aria-hidden="true"><img src="images/convention-flier-2026.webp" alt="" width="863" height="1080" loading="lazy"></div>
+    </div>
+  </section>
 
   <section class="band" id="theme">
     <div class="wrap">
