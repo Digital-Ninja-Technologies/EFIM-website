@@ -176,7 +176,9 @@ function initScene(){
     });
     var a=1-Math.pow(.0012,dt);
     if(st.x===null){st.x=targetX;st.y=targetY;st.w=width;}
-    st.x=lerp(st.x,targetX,a);st.y=lerp(st.y,targetY,a);st.w=lerp(st.w,width,a);
+    /* y is locked to the page scroll (no easing) so the flier can never trail behind the content and float over text during a fast flick */
+    var ax=1-Math.pow(.00008,dt);
+    st.x=lerp(st.x,targetX,ax);st.y=targetY;st.w=lerp(st.w,width,ax);
     px=lerp(px,pnx,.06);py=lerp(py,pny,.06);
     var free=1-dw*.85;
     var yawT=(-.3+Math.sin(sp*.0034)*.6*tSize+px*.35)*free+spin+(1-intro)*Math.PI*1.2;
