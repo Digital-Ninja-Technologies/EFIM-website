@@ -1,12 +1,12 @@
 /**
- * TEFIM 2026 National Convention: registration receiver.
+ * The Evangel Faith Mission 2026 National Convention: registration receiver.
  * Deploy as a web app (Execute as: Me, Who has access: Anyone) and put the /exec URL in the
  * Vercel env var SHEET_WEBHOOK_URL. Set a Script Property SECRET and use the same value in
  * SHEET_WEBHOOK_SECRET so only the website can add rows.
- * The first registration creates the spreadsheet "TEFIM 2026 Convention Registrations" in the
+ * The first registration creates the spreadsheet "The Evangel Faith Mission 2026 Convention Registrations" in the
  * deploying Google account's Drive. Open it, or use File > Download > Microsoft Excel (.xlsx).
  */
-var SHEET_TITLE = 'TEFIM 2026 Convention Registrations';
+var SHEET_TITLE = 'The Evangel Faith Mission 2026 Convention Registrations';
 var HEADERS = ['Received', 'Reference', 'Name', 'Phone', 'Email', 'Branch', 'Days', 'People', 'First time'];
 
 function doPost(e) {
@@ -27,7 +27,7 @@ function doPost(e) {
 }
 
 function doGet() {
-  return out_({ ok: true, service: 'tefim-convention-registrations' });
+  return out_({ ok: true, service: 'evangel-faith-mission-convention-registrations' });
 }
 
 function sheet_() {

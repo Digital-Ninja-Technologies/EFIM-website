@@ -1,5 +1,5 @@
-# EFIM-website
-Church website (static site on Vercel).
+# The Evangel Faith Mission website
+Website for The Evangel Faith Mission, Lagos (static site on Vercel).
 
 ## Convention registrations to a spreadsheet
 `/api/register` (see `api/register.js`) forwards each registration to a Google Sheet through a small Apps Script web app.
@@ -9,4 +9,4 @@ Church website (static site on Vercel).
 3. Deploy > New deployment > Web app. Execute as: Me. Who has access: Anyone. Copy the `/exec` URL.
 4. In Vercel (Project > Settings > Environment Variables) add `SHEET_WEBHOOK_URL` (the `/exec` URL) and `SHEET_WEBHOOK_SECRET` (same value as `SECRET`), then redeploy.
 
-The first registration creates the sheet "TEFIM 2026 Convention Registrations". Open it in Google Sheets, or use File > Download > Microsoft Excel (.xlsx).
+The first registration creates the sheet "The Evangel Faith Mission 2026 Convention Registrations". Open it in Google Sheets, or use File > Download > Microsoft Excel (.xlsx).

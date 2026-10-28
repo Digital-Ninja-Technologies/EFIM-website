@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="2026 National Convention of The Evangel Faith Mission: New Things By His Spirit. Friday 20th to Sunday 22nd November 2026, Faith Plaza, Bariga, Lagos.">
 <meta name="theme-color" content="#070914">
-<title>2026 National Convention · Evangel Faith Mission</title>
+<title>2026 National Convention · The Evangel Faith Mission</title>
 <meta property="og:title" content="2026 National Convention: New Things By His Spirit">
 <meta property="og:description" content="Fri 20 – Sun 22 November 2026 · Faith Plaza, CM Bariga Road, Lagos">
 <meta property="og:image" content="images/convention-flier-2026.webp">
@@ -355,9 +355,9 @@ dialog#lb button:hover{border-color:var(--lamp);color:var(--lamp)}
 
 <header class="nav">
   <div class="wrap">
-    <a class="brand" href="index.html" aria-label="Evangel Faith Mission home">
+    <a class="brand" href="index.html" aria-label="The Evangel Faith Mission home">
       <img class="logo" src="logo.webp" alt="" width="38" height="38">
-      <span>Evangel <small>Faith Mission</small></span>
+      <span>The Evangel <small>Faith Mission</small></span>
     </a>
     <ul id="navList">
       <li><a href="index.html">Home</a></li>
@@ -529,7 +529,7 @@ dialog#lb button:hover{border-color:var(--lamp);color:var(--lamp)}
 <footer>
   <div class="wrap">
     <div class="frow">
-      <span>© 2026 The Evangel Faith International Mission (TEFIM)</span>
+      <span>© 2026 The Evangel Faith Mission</span>
       <nav><a href="index.html">Home</a><a href="index.html#gather">Gatherings</a><a href="index.html#branches">Branches</a><a href="convention.html">Convention</a><a href="https://www.facebook.com/theevangelfaithinternationalmission/" target="_blank" rel="noopener">Facebook</a></nav>
     </div>
     <div class="giant" aria-hidden="true"><span>NEW</span><span><b class="s-end">THINGS<i class="dock" id="flierDockFoot" data-hold="1" data-last="1" data-wobble="1"><img src="images/convention-flier-2026.webp" alt="" width="863" height="1080" loading="lazy"></i></b></span><span>2026</span></div>
@@ -564,8 +564,8 @@ tick();setInterval(tick,1000);
 
 /* add to calendar (all-day event, Fri 20 – Sun 22 Nov 2026) */
 document.getElementById('addCal').addEventListener('click',()=>{
-  const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//TEFIM//Convention 2026//EN','BEGIN:VEVENT','UID:convention-2026@tefim','DTSTAMP:20261028T000000Z','DTSTART;VALUE=DATE:20261120','DTEND;VALUE=DATE:20261123','SUMMARY:2026 National Convention: New Things By His Spirit','LOCATION:Faith Plaza\\, CM Bariga Road\\, opp. Dada Street\\, Bariga Road\\, Lagos','DESCRIPTION:The Evangel Faith Mission 2026 National Convention. Zech 4:6\\, Isa 43:19.','END:VEVENT','END:VCALENDAR'].join('\r\n');
-  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar'}));a.download='tefim-convention-2026.ics';document.body.appendChild(a);a.click();a.remove();
+  const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//The Evangel Faith Mission//Convention 2026//EN','BEGIN:VEVENT','UID:convention-2026@evangelfaithmission','DTSTAMP:20261028T000000Z','DTSTART;VALUE=DATE:20261120','DTEND;VALUE=DATE:20261123','SUMMARY:2026 National Convention: New Things By His Spirit','LOCATION:Faith Plaza\\, CM Bariga Road\\, opp. Dada Street\\, Bariga Road\\, Lagos','DESCRIPTION:The Evangel Faith Mission 2026 National Convention. Zech 4:6\\, Isa 43:19.','END:VEVENT','END:VCALENDAR'].join('\r\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar'}));a.download='evangel-faith-mission-convention-2026.ics';document.body.appendChild(a);a.click();a.remove();
 });
 
 /* share */
