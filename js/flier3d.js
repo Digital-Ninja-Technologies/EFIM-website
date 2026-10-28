@@ -81,8 +81,9 @@ function initScene(){
 
   var pivot=new T.Group();scene.add(pivot);
   var gold=new T.MeshStandardMaterial({color:0xe0a93a,metalness:.85,roughness:.32});
-  var front=new T.MeshStandardMaterial({color:0xffffff,roughness:.42,metalness:.04,emissive:0xffffff,emissiveIntensity:.32});
-  var back=new T.MeshStandardMaterial({color:0xffffff,roughness:.5,metalness:.1});
+  var front=new T.MeshStandardMaterial({color:0xffffff,roughness:.42,metalness:.04,emissive:0xffffff,emissiveIntensity:.32,transparent:true});
+  var back=new T.MeshStandardMaterial({color:0xffffff,roughness:.5,metalness:.1,transparent:true});
+  gold.transparent=true;
   /* BoxGeometry order: +x -x +y -y +z -z */
   var mesh=new T.Mesh(new T.BoxGeometry(1,ASPECT,.03),[gold,gold,gold,gold,front,back]);
   pivot.add(mesh);
@@ -153,7 +154,8 @@ function initScene(){
     /* progress starts once the placeholder reaches the upper half of the screen (matters on phones) */
     var s0=Math.max(0,docTop-vh*.5);
     var sp=Math.max(0,s-s0);
-    var wEnd=clamp(w0*.27,84,128);
+    var small=vw<700;
+    var wEnd=small?54:clamp(w0*.27,84,128);
     var tSize=easeOut(clamp(sp/(vh*1.1),0,1));
     var width=lerp(w0,wEnd,tSize)*(.55+.45*intro);
     var tx=easeInOut(clamp(sp/(vh*3.4),0,1));
@@ -181,6 +183,9 @@ function initScene(){
     var pitchT=(-py*.22+Math.sin(sp*.0021)*.1*tSize)*free;
     var rollT=Math.sin(sp*.002)*.07*tSize*free;
     st.yaw=lerp(st.yaw,yawT,a);st.pitch=lerp(st.pitch,pitchT,a);st.roll=lerp(st.roll,rollT,a);
+    /* on phones the travelling flier is tiny and see-through so it never hides copy; docked it is fully opaque */
+    var op=lerp(1,small?.55:1,(1-dw)*tSize);
+    front.opacity=back.opacity=gold.opacity=op;
     pivot.position.set(st.x-vw/2,-(st.y-vh/2),0);
     pivot.scale.setScalar(st.w);
     pivot.rotation.set(st.pitch,st.yaw,st.roll,'YXZ');
