@@ -135,7 +135,9 @@ section.band{padding-block:clamp(80px,12vw,150px)}
 .tab{font-family:var(--f-body);font-weight:700;font-size:.9rem;color:var(--mute);background:transparent;border:1px solid var(--line);border-radius:999px;padding:10px 18px;cursor:pointer;transition:all .25s}
 .tab[aria-selected="true"]{background:var(--ink);color:var(--night);border-color:var(--ink)}
 .panel{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:40px;align-items:stretch}
-.panel .big{border-radius:24px;padding:36px;background:radial-gradient(120% 120% at 0% 0%,rgba(255,178,62,.22),transparent 55%),var(--night);border:1px solid var(--line);display:flex;flex-direction:column;justify-content:space-between;min-height:320px}
+.panel .big{position:relative;isolation:isolate;overflow:hidden;border-radius:24px;padding:36px;background:radial-gradient(120% 120% at 0% 0%,rgba(255,178,62,.22),transparent 55%),var(--night);border:1px solid var(--line);display:flex;flex-direction:column;justify-content:space-between;min-height:320px}
+.panel .big::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(7,9,20,.5) 0%,rgba(7,9,20,.35) 35%,rgba(7,9,20,.92) 100%),var(--bg) center/cover no-repeat;transform:scale(1.04);transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.panel .big:hover::before{transform:scale(1.12)}
 .panel .big h3{font-size:clamp(2.2rem,5vw,4rem);font-weight:800}
 .panel .big .when{font-family:var(--f-mono);font-size:.85rem;color:var(--lamp);letter-spacing:.06em}
 .panel ol{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
@@ -710,17 +712,17 @@ else if(hv){const pp=hv.play();if(pp&&pp.catch)pp.catch(()=>{});}
 
 /* ---------- programme tabs ---------- */
 const PROG = {
-  sun:{title:'Sunday<br>Celebration',when:'SUNDAYS · 9:00 AM',items:[
+  sun:{img:'images/gather-sunday.webp',title:'Sunday<br>Celebration',when:'SUNDAYS · 9:00 AM',items:[
     ['8:30','Pre-service prayer','Intercessors cover the service'],
     ['9:00','Praise & worship','Choir and congregation'],
     ['9:45','The Word','Preaching and teaching'],
     ['11:00','Testimonies & thanksgiving','Celebrating what God has done'],
     ['11:30','Benediction','Fellowship after service']]},
-  mid:{title:'Bible<br>Study',when:'WEDNESDAYS · 6:00 PM',items:[
+  mid:{img:'images/gather-bible-study.webp',title:'Bible<br>Study',when:'WEDNESDAYS · 6:00 PM',items:[
     ['6:00','Opening worship','Settle in and sing'],
     ['6:20','Bible study','Book-by-book teaching'],
     ['7:15','Questions & prayer','Small groups and ministration']]},
-  pray:{title:'Prayer<br>Night',when:'FRIDAYS · 6:00 PM',items:[
+  pray:{img:'images/gather-prayer.webp',title:'Prayer<br>Night',when:'FRIDAYS · 6:00 PM',items:[
     ['6:00','Worship','Lifting hands in praise'],
     ['6:30','Intercession','Church, family, Lagos and Nigeria'],
     ['7:30','Healing & deliverance','Personal ministration']]}
@@ -728,7 +730,7 @@ const PROG = {
 const panel = document.getElementById('panel');
 function renderTab(k){
   const p = PROG[k];
-  panel.innerHTML = `<div class="big"><div class="when">${p.when} <span class="tbc">TBC</span></div><h3>${p.title}</h3></div>
+  panel.innerHTML = `<div class="big" style="--bg:url(${p.img})"><div class="when">${p.when} <span class="tbc">TBC</span></div><h3>${p.title}</h3></div>
   <ol>${p.items.map(i=>`<li><time>${i[0]}</time><div><b>${i[1]}</b><span>${i[2]}</span></div></li>`).join('')}</ol>`;
   if(!reduce && window.gsap){gsap.from(panel.querySelectorAll('li'),{x:30,duration:.5,stagger:.06,ease:'power3.out'});gsap.from(panel.querySelector('.big'),{scale:.96,duration:.6,ease:'power3.out'});}
 }
