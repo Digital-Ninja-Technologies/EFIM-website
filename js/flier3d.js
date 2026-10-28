@@ -120,10 +120,10 @@ function initScene(){
 
   /* layout metrics, refreshed on resize / layout shifts */
   /* landing pads: the flier docks into each .dock as it nears the middle of the screen; data-hold pads keep it once reached */
-  var docks=[].slice.call(document.querySelectorAll('.dock')).map(function(el){return {el:el,hold:el.getAttribute('data-hold')==='1',cx:0,top:0,w:0,h:0};});
-  var vw=1,vh=1,w0=300,docCx=0,docCy=0,docTop=0;
+  var docks=[].slice.call(document.querySelectorAll('.dock')).map(function(el){return {el:el,hold:el.getAttribute('data-hold')==='1',last:el.getAttribute('data-last')==='1',wobble:el.getAttribute('data-wobble')==='1',cx:0,top:0,w:0,h:0};});
+  var vw=1,vh=1,w0=300,docCx=0,docCy=0,docTop=0,maxS=0;
   function measure(){
-    vw=innerWidth;vh=innerHeight;
+    vw=innerWidth;vh=innerHeight;maxS=Math.max(0,document.documentElement.scrollHeight-vh);
     renderer.setSize(vw,vh,false);
     camera.aspect=vw/vh;
     camera.position.z=(vh/2)/Math.tan(FOV*Math.PI/360);
@@ -164,16 +164,25 @@ function initScene(){
     var yLive=docCy-s,yPin=vh*.52;
     var targetY=Math.max(yLive,yPin)+Math.sin(now/1000*1.3)*7*tSize;
     /* landing pad: while the pad is near the middle of the screen the flier eases into it and fills it */
-    var dw=0;
+    var dw=0,ww=0;
     docks.forEach(function(k){
       if(k.w<=0)return;
       var dyc=k.top+k.h/2-s;
-      var dist=Math.abs(dyc-vh*.5)/vh;
-      if(k.hold&&dyc<vh*.5)dist=0;
-      var w=easeInOut(1-clamp((dist-.1)/.5,0,1));
+      var w;
+      if(k.hold&&dyc<vh*.5){
+        /* hold: stays put until the pad has risen past 30% of the screen, then lets go over the next 60% */
+        w=dyc>=vh*.3?1:easeInOut(1-clamp((vh*.3-dyc)/(vh*.6),0,1));
+      }else{
+        var dist=Math.abs(dyc-vh*.5)/vh;
+        w=easeInOut(1-clamp((dist-.1)/.5,0,1));
+      }
+      /* the last pad (footer) takes over for good as the page runs out */
+      if(k.last)w=Math.max(w,easeInOut(1-clamp((maxS-s)/(vh*.7),0,1)));
       targetX=lerp(targetX,k.cx,w);targetY=lerp(targetY,dyc,w);width=lerp(width,k.w,w);
       dw=Math.max(dw,w);
+      if(k.wobble)ww=Math.max(ww,w);
     });
+    targetY+=Math.sin(now/1000*2.8)*9*ww;
     var a=1-Math.pow(.0012,dt);
     if(st.x===null){st.x=targetX;st.y=targetY;st.w=width;}
     /* y is locked to the page scroll (no easing) so the flier can never trail behind the content and float over text during a fast flick */
@@ -184,6 +193,9 @@ function initScene(){
     var yawT=(-.3+Math.sin(sp*.0034)*.6*tSize+px*.35)*free+spin+(1-intro)*Math.PI*1.2;
     var pitchT=(-py*.22+Math.sin(sp*.0021)*.1*tSize)*free;
     var rollT=Math.sin(sp*.002)*.07*tSize*free;
+    /* wobble while perched on the footer S */
+    var tt=now/1000;
+    yawT+=Math.sin(tt*2.4)*.5*ww;pitchT+=Math.sin(tt*1.9+2)*.16*ww;rollT+=Math.sin(tt*3.3+1)*.24*ww;
     st.yaw=lerp(st.yaw,yawT,a);st.pitch=lerp(st.pitch,pitchT,a);st.roll=lerp(st.roll,rollT,a);
     /* on phones the travelling flier is tiny and see-through so it never hides copy; docked it is fully opaque */
     var op=lerp(1,small?.55:1,(1-dw)*tSize);
