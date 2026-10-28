@@ -144,6 +144,7 @@ function initScene(){
   function frame(now){
     requestAnimationFrame(frame);
     if(document.hidden||!pivot.visible)return;
+    if(root.classList.contains('cvloading')){t0=now;lastT=now;return;}
     var dt=Math.min(.05,(now-lastT)/1000);lastT=now;
     var s=scrollY;
     var vel=(s-lastS)/Math.max(dt,.001);lastS=s;

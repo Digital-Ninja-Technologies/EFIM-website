@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="2026 National Convention of The Evangel Faith Mission: New Things By His Spirit. Friday 20th to Sunday 22nd November 2026, Faith Plaza, Bariga, Lagos.">
 <meta name="theme-color" content="#070914">
+<script>document.documentElement.classList.add('cvloading')</script>
+<noscript><style>#cv-loader{display:none!important}html.cvloading,html.cvloading body{overflow:auto!important}</style></noscript>
 <title>2026 National Convention · The Evangel Faith Mission</title>
 <meta property="og:title" content="2026 National Convention: New Things By His Spirit">
 <meta property="og:description" content="Fri 20 – Sun 22 November 2026 · Faith Plaza, CM Bariga Road, Lagos">
@@ -66,6 +68,43 @@ html.cur-native,html.cur-native *{cursor:auto!important}
 @keyframes eq{50%{height:5px}}
 @keyframes pillpulse{50%{box-shadow:0 0 0 6px rgba(255,178,62,.18)}}
 @media (prefers-reduced-motion:reduce){#song-btn i,#song-pill.wait{animation:none}}
+
+/* preloader: green curtains with the spinning seal, then the curtains part */
+#cv-loader{display:none;position:fixed;inset:0;z-index:300;color:var(--ink);place-items:center;--cvbg:radial-gradient(70% 60% at 50% 40%,#0e4a27 0%,#07200f 45%,#030a06 100%)}
+html.cvloading #cv-loader{display:grid}
+html.cvloading,html.cvloading body{overflow:hidden}
+.cv-half{position:absolute;top:0;bottom:0;width:50%;overflow:hidden;transition:transform 1.15s cubic-bezier(.77,0,.18,1);will-change:transform}
+.cv-half.l{left:0}.cv-half.r{right:0}
+.cv-half>i{position:absolute;top:0;bottom:0;width:100vw;background:var(--cvbg),#030a06}
+.cv-half.l>i{left:0}.cv-half.r>i{right:0}
+.cv-half::after{content:"";position:absolute;top:0;bottom:0;width:2px;background:linear-gradient(180deg,transparent,var(--lamp),transparent)}
+.cv-half.l::after{right:0}.cv-half.r::after{left:0}
+#cv-loader.open .cv-half.l{transform:translateX(-101%)}
+#cv-loader.open .cv-half.r{transform:translateX(101%)}
+.cv-seam{position:absolute;left:50%;top:0;bottom:0;width:30vw;margin-left:-15vw;background:radial-gradient(closest-side,rgba(255,206,120,.55),transparent);opacity:0;transition:opacity .5s}
+#cv-loader.open .cv-seam{opacity:1;transition-delay:.15s}
+.cv-c{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:20px;padding-inline:16px;text-align:center;transition:opacity .45s,transform .6s cubic-bezier(.2,.7,.2,1)}
+#cv-loader.open .cv-c{opacity:0;transform:scale(.92)}
+.cv-coin{position:relative;width:clamp(120px,34vw,150px);aspect-ratio:1}
+.cv-coin .logo-dock{position:absolute;inset:8%;width:84%;height:84%}
+.logo-dock canvas{position:absolute;inset:-12%;width:124%;height:124%;display:block}
+.logo-dock img{display:block;width:100%;height:100%;border-radius:50%}
+.logo-dock.gl img{opacity:0}
+.cv-ring{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.cv-ring circle{fill:none;stroke-width:1.6}
+.cv-ring .bg{stroke:rgba(255,255,255,.14)}
+.cv-ring .fg{stroke:var(--lamp);stroke-linecap:round;filter:drop-shadow(0 0 6px rgba(255,178,62,.7))}
+.cv-eyebrow{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.3em;color:var(--lamp);text-transform:uppercase;animation:cvrise .8s .1s both}
+.cv-t{font-family:var(--f-display);font-weight:800;line-height:.92;font-size:clamp(2.2rem,8vw,4.4rem);letter-spacing:-.02em}
+.cv-t span{display:block;animation:cvrise .9s both}
+.cv-t span:nth-child(1){animation-delay:.25s}
+.cv-t span:nth-child(2){animation-delay:.42s;background:linear-gradient(100deg,#ffe28a 5%,var(--lamp) 45%,#ff9a2e 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cv-count{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.3em;color:#a9c9b6;font-variant-numeric:tabular-nums}
+.cv-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.cv-actions[hidden]{display:none}
+.cv-actions .btn-ghost{color:#cfe3d6}
+@keyframes cvrise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.cv-half,.cv-c,.cv-seam{transition-duration:.01s}.cv-eyebrow,.cv-t span{animation:none}}
 
 /* nav */
 header.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(7,9,20,.72);border-bottom:1px solid var(--line)}
@@ -140,7 +179,7 @@ html.menu-open #song-pill{opacity:0;pointer-events:none}
 .flier button:hover{transform:rotate(0) scale(1.02);box-shadow:0 40px 100px rgba(20,178,90,.4)}
 .flier img{display:block;width:100%;height:auto}
 .flier figcaption{font-family:var(--f-mono);font-size:.64rem;letter-spacing:.14em;color:var(--mute);text-align:center;margin-top:14px;text-transform:uppercase}
-@media (max-width:900px){.hero .wrap{grid-template-columns:1fr}.flier{order:0;max-width:380px;margin-inline:auto}}
+@media (max-width:900px){.hero .wrap{grid-template-columns:1fr}.flier{max-width:380px;margin-inline:auto}}
 
 /* countdown */
 .count{margin-top:30px;max-width:520px;border:1px solid var(--line);background:rgba(13,17,36,.7);backdrop-filter:blur(6px);border-radius:20px;padding:18px 20px}
@@ -349,6 +388,24 @@ dialog#lb button:hover{border-color:var(--lamp);color:var(--lamp)}
 </style>
 </head>
 <body>
+<div id="cv-loader" role="dialog" aria-label="Loading the 2026 National Convention" aria-live="polite">
+  <div class="cv-half l" aria-hidden="true"><i></i></div>
+  <div class="cv-half r" aria-hidden="true"><i></i></div>
+  <div class="cv-seam" aria-hidden="true"></div>
+  <div class="cv-c">
+    <div class="cv-coin">
+      <svg class="cv-ring" viewBox="0 0 100 100" aria-hidden="true"><circle class="bg" cx="50" cy="50" r="47"/><circle class="fg" id="cvRing" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100"/></svg>
+      <i class="logo-dock" aria-hidden="true"><img src="logo.webp" alt="" width="360" height="360"></i>
+    </div>
+    <div class="cv-eyebrow">2026 National Convention</div>
+    <h1 class="cv-t" style="margin:0"><span>New things</span><span>by His Spirit</span></h1>
+    <div class="cv-count" id="cvCount">LOADING · 000</div>
+    <div class="cv-actions" id="cvActions" hidden>
+      <button class="btn btn-lamp" id="cvSound" type="button">Enter with worship <span class="arr">♪</span></button>
+      <button class="btn btn-ghost" id="cvQuiet" type="button">Enter quietly</button>
+    </div>
+  </div>
+</div>
 <audio id="song" src="new-thing.mp3" preload="none" loop></audio>
 <div id="song-pill" class="wait"><button id="song-btn" class="off" type="button" aria-label="Play music"><i></i><i></i><i></i><i></i></button><span><b>New Thing</b> TRIBL ft. Montell Moore</span></div>
 <div id="progress"></div>
@@ -541,6 +598,7 @@ dialog#lb button:hover{border-color:var(--lamp);color:var(--lamp)}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="js/three.min.js"></script>
+<script src="js/logo3d.js" defer></script>
 <script src="js/flier3d.js" defer></script>
 <script>
 (function(){
@@ -675,6 +733,43 @@ if(pill){var t=0;addEventListener('scroll',function(){if(t)return;t=requestAnima
 })();
 </script>
 <script>
+/* preloader: waits for the page and the flier, fills a ring, then the curtains part. "Enter with worship" starts the song (a tap is the gesture browsers need). */
+(function(){
+  var root=document.documentElement,L=document.getElementById('cv-loader');
+  if(!L){root.classList.remove('cvloading');return;}
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ring=document.getElementById('cvRing'),cnt=document.getElementById('cvCount'),act=document.getElementById('cvActions');
+  var t0=performance.now(),shown=0,loaded=document.readyState==='complete',imgOk=false,ready=false,opened=false,autoT=0;
+  var MIN=reduce?250:1800,MAX=4800;
+  addEventListener('load',function(){loaded=true;});
+  var im=new Image();im.src='images/convention-flier-2026.webp';
+  (im.decode?im.decode():Promise.resolve()).catch(function(){}).then(function(){imgOk=true;});
+  function setP(v){ring.style.strokeDashoffset=100-v;cnt.textContent='LOADING · '+String(Math.round(v)).padStart(3,'0');}
+  function tick(now){
+    if(ready)return;
+    var el=now-t0,cap=(loaded&&imgOk)?100:88,want=Math.min(cap,el/MIN*100);
+    if(el>MAX)want=100;
+    shown+=(want-shown)*.14;if(want-shown<.4)shown=want;
+    setP(shown);
+    if(shown>=99.5){ready=true;setP(100);cnt.textContent='READY · 100';act.hidden=false;document.getElementById('cvSound').focus({preventScroll:true});autoT=setTimeout(function(){enter(false,false);},6500);return;}
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+  function enter(sound,explicitQuiet){
+    if(opened)return;opened=true;clearTimeout(autoT);
+    if(sound&&window.songEnter)window.songEnter();
+    if(explicitQuiet&&window.songQuiet)window.songQuiet();
+    L.classList.add('open');
+    root.classList.remove('cvloading');                       /* page animations and the 3D flier start with the reveal */
+    setTimeout(function(){L.remove();},reduce?50:1300);
+  }
+  document.getElementById('cvSound').addEventListener('click',function(){enter(true,false);});
+  document.getElementById('cvQuiet').addEventListener('click',function(){enter(false,true);});
+  addEventListener('keydown',function(e){if(e.key==='Escape')enter(false,false);});
+  setTimeout(function(){enter(false,false);},10000);          /* never trap the visitor */
+})();
+</script>
+<script>
 /* background song: begins at 0:30. Browsers usually block sound until the visitor interacts, so we try straight away and otherwise start on the first tap or key press. */
 (function(){
   var a=document.getElementById('song'),btn=document.getElementById('song-btn'),pill=document.getElementById('song-pill');
@@ -691,7 +786,9 @@ if(pill){var t=0;addEventListener('scroll',function(){if(t)return;t=requestAnima
   var evs=['pointerdown','keydown','touchstart'];
   function arm(){evs.forEach(function(e){addEventListener(e,first,{capture:true});});}
   function disarm(){evs.forEach(function(e){removeEventListener(e,first,{capture:true});});}
-  function first(e){if(!wanted)return;if(e.target&&e.target.closest&&e.target.closest('#song-pill'))return;play();}
+  function first(e){if(!wanted)return;if(e.target&&e.target.closest&&e.target.closest('#song-pill,#cv-loader'))return;play();}
+  window.songEnter=function(){wanted=true;play();};
+  window.songQuiet=function(){wanted=false;disarm();ui(false);pill.classList.remove('wait');};
   btn.addEventListener('click',function(){
     if(a.paused){wanted=true;play();}else{wanted=false;a.pause();ui(false);pill.classList.remove('mini');}
   });
