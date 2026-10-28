@@ -118,8 +118,9 @@ function initScene(){
   })();
 
   /* layout metrics, refreshed on resize / layout shifts */
-  var dock=document.getElementById('flierDock');
-  var vw=1,vh=1,w0=300,docCx=0,docCy=0,docTop=0,dkCx=0,dkTop=0,dkW=0,dkH=0;
+  /* landing pads: the flier docks into each .dock as it nears the middle of the screen; data-hold pads keep it once reached */
+  var docks=[].slice.call(document.querySelectorAll('.dock')).map(function(el){return {el:el,hold:el.getAttribute('data-hold')==='1',cx:0,top:0,w:0,h:0};});
+  var vw=1,vh=1,w0=300,docCx=0,docCy=0,docTop=0;
   function measure(){
     vw=innerWidth;vh=innerHeight;
     renderer.setSize(vw,vh,false);
@@ -128,7 +129,7 @@ function initScene(){
     camera.updateProjectionMatrix();
     var r=ph.getBoundingClientRect(),sy=scrollY;
     w0=Math.max(120,r.width);docCx=r.left+r.width/2;docCy=r.top+sy+r.height/2;docTop=r.top+sy;
-    if(dock){var d=dock.getBoundingClientRect();dkW=d.width;dkH=d.height;dkCx=d.left+d.width/2;dkTop=d.top+sy;}
+    docks.forEach(function(k){var d=k.el.getBoundingClientRect();k.w=d.width;k.h=d.height;k.cx=d.left+d.width/2;k.top=d.top+sy;});
   }
   measure();
   addEventListener('resize',measure);
@@ -162,12 +163,15 @@ function initScene(){
     var targetY=Math.max(yLive,yPin)+Math.sin(now/1000*1.3)*7*tSize;
     /* landing pad: while the pad is near the middle of the screen the flier eases into it and fills it */
     var dw=0;
-    if(dock&&dkW>0){
-      var dyc=dkTop+dkH/2-s;
+    docks.forEach(function(k){
+      if(k.w<=0)return;
+      var dyc=k.top+k.h/2-s;
       var dist=Math.abs(dyc-vh*.5)/vh;
-      dw=easeInOut(1-clamp((dist-.1)/.5,0,1));
-      targetX=lerp(targetX,dkCx,dw);targetY=lerp(targetY,dyc,dw);width=lerp(width,dkW,dw);
-    }
+      if(k.hold&&dyc<vh*.5)dist=0;
+      var w=easeInOut(1-clamp((dist-.1)/.5,0,1));
+      targetX=lerp(targetX,k.cx,w);targetY=lerp(targetY,dyc,w);width=lerp(width,k.w,w);
+      dw=Math.max(dw,w);
+    });
     var a=1-Math.pow(.0012,dt);
     if(st.x===null){st.x=targetX;st.y=targetY;st.w=width;}
     st.x=lerp(st.x,targetX,a);st.y=lerp(st.y,targetY,a);st.w=lerp(st.w,width,a);

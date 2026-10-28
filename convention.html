@@ -251,10 +251,12 @@ fieldset.fld{border:0;margin:0;padding:0}
 @media (max-width:560px){.rgrid,.tk dl{grid-template-columns:1fr}}
 
 /* closing call */
-.close{text-align:center}
-.close h2{font-size:clamp(2.4rem,7vw,6rem);font-weight:800;max-width:16ch;margin-inline:auto}
-.close p{color:var(--mute);max-width:46ch;margin:22px auto 0}
-.close .ctas{justify-content:center}
+.close-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,6vw,96px);align-items:center}
+.close-grid .dock{margin-inline:0 auto}
+.close h2{font-size:clamp(2.4rem,6.4vw,5.6rem);font-weight:800;max-width:12ch}
+.close p{color:var(--mute);max-width:46ch;margin:22px 0 0}
+.close .ctas{justify-content:flex-start}
+@media (max-width:900px){.close-grid{grid-template-columns:1fr}.close-grid .dock{margin-inline:auto}}
 
 /* footer */
 footer{border-top:1px solid var(--line);padding-block:60px 0;overflow:hidden}
@@ -358,7 +360,7 @@ dialog#lb button:hover{border-color:var(--lamp);color:var(--lamp)}
         <p class="lead rv">Three days set apart for you. Come expecting, and leave with more than you came with.</p>
         <ul class="gl-list"><li class="rv" style="--d:0.00s"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c1.6 3 4.5 4.8 4.5 8.5a4.5 4.5 0 0 1-9 0c0-2 1-3.2 2-4.2.1 1.6.8 2.4 1.7 2.7C10.8 7.6 11 5.2 12 3z"/><path d="M8 21h8"/></svg></div><div><b>Fresh fire and renewal</b><span>Be refreshed by the Holy Spirit and leave stirred up for the season ahead.</span></div></li><li class="rv" style="--d:0.06s"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></div><div><b>Clarity and direction</b><span>Hear what God is saying for your family, work and purpose in the new things He is doing.</span></div></li><li class="rv" style="--d:0.12s"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v15H5.5C4.7 19 4 18.3 4 17.5z"/><path d="M20 5.5c0-.8-.7-1.5-1.5-1.5H13v15h5.5c.8 0 1.5-.7 1.5-1.5z"/></svg></div><div><b>Teaching that equips</b><span>Receive the Word from Rev. M.G Kafaru and Pst. Moses Oyerinde and carry it home.</span></div></li><li class="rv" style="--d:0.18s"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg></div><div><b>Worship in His presence</b><span>Join thousands in praise led by Kay Wonders and experience the presence of God together.</span></div></li><li class="rv" style="--d:0.24s"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 21v-8l-2-3V7a1.5 1.5 0 0 1 3 0v3m0-5a1.5 1.5 0 0 1 3 0v5m0-4a1.5 1.5 0 0 1 3 0v6m0-3a1.5 1.5 0 0 1 3 0v5c0 3-2 6-5 6H8z"/></svg></div><div><b>Prayer and ministration</b><span>Stand in faith with ministers and fellow believers for breakthrough in your life and home.</span></div></li><li class="rv" style="--d:0.30s"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M15.5 14.2c.5-.1 1-.2 1.5-.2 2.5 0 4 1.8 4 4.5"/></svg></div><div><b>One family, many branches</b><span>Meet believers from Lagos, Ibadan, Delta, Abeokuta and beyond, and build lasting fellowship.</span></div></li></ul>
       </div>
-      <div class="dock rv" id="flierDock" aria-hidden="true"><img src="images/convention-flier-2026.webp" alt="" width="863" height="1080" loading="lazy"></div>
+      <div class="dock" id="flierDock" aria-hidden="true"><img src="images/convention-flier-2026.webp" alt="" width="863" height="1080" loading="lazy"></div>
     </div>
   </section>
 
@@ -451,11 +453,14 @@ dialog#lb button:hover{border-color:var(--lamp);color:var(--lamp)}
   </section>
 
   <section class="band close">
-    <div class="wrap rv">
+    <div class="wrap close-grid">
+      <div class="dock" id="flierDockEnd" data-hold="1" aria-hidden="true"><img src="images/convention-flier-2026.webp" alt="" width="863" height="1080" loading="lazy"></div>
+      <div class="rv" style="--d:.12s">
       <div class="eyebrow">You are invited</div>
       <h2 style="margin-top:18px">Come and see <em class="s">new things</em></h2>
       <p>Join us at the 2026 National Convention. Invite someone you love to come with you.</p>
       <div class="ctas"><a class="btn btn-lamp" href="#register">Register now <span class="arr">→</span></a><button class="btn btn-ghost" id="shareBtn" type="button">Share this invite</button><a class="btn btn-ghost" href="index.html#pray">Send a prayer request</a></div>
+    </div>
     </div>
   </section>
 </main>
