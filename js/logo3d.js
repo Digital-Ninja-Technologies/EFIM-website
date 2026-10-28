@@ -65,6 +65,7 @@ docks.forEach(function(dock){
     var s=scrollY;spin=clamp(spin+(s-lastS)/Math.max(dt,.001)*.00005,-4,4);lastS=s;spin*=Math.pow(.05,dt);
     var t=(now-t0)/1000;
     var intro=easeOut(clamp(t/1.8,0,1));
+    var T=window.PhoneTilt;if(T&&T.active){nx=T.x;ny=T.y;}
     px+=(nx-px)*.08;py+=(ny-py)*.08;
     /* wobble: three slow oscillations that never line up, plus pointer lean and scroll spin */
     group.rotation.y=(1-intro)*Math.PI*4+Math.sin(t*1.6)*.6*intro+px*.55+spin;

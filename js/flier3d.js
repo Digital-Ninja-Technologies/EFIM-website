@@ -189,10 +189,14 @@ function initScene(){
     /* y is locked to the page scroll (no easing) so the flier can never trail behind the content and float over text during a fast flick */
     var ax=1-Math.pow(.00008,dt);
     st.x=lerp(st.x,targetX,ax);st.y=targetY;st.w=lerp(st.w,width,ax);
-    px=lerp(px,pnx,.06);py=lerp(py,pny,.06);
+    /* phone motion (gyroscope) takes over from the pointer and tilts the flier harder, even while docked */
+    var T=window.PhoneTilt,tiltOn=!!(T&&T.active);
+    if(tiltOn){pnx=T.x;pny=T.y;glare.position.x=T.x*vw*.4;glare.position.y=-T.y*vh*.4;}
+    px=lerp(px,pnx,tiltOn?.18:.06);py=lerp(py,pny,tiltOn?.18:.06);
     var free=1-dw*.85;
-    var yawT=(-.3+Math.sin(sp*.0034)*.6*tSize+px*.35)*free+spin+(1-intro)*Math.PI*1.2;
-    var pitchT=(-py*.22+Math.sin(sp*.0021)*.1*tSize)*free;
+    var pf=tiltOn?1:free,pxk=tiltOn?.65:.35,pyk=tiltOn?.55:.22;
+    var yawT=(-.3+Math.sin(sp*.0034)*.6*tSize)*free+px*pxk*pf+spin+(1-intro)*Math.PI*1.2;
+    var pitchT=(Math.sin(sp*.0021)*.1*tSize)*free-py*pyk*pf;
     var rollT=Math.sin(sp*.002)*.07*tSize*free;
     /* wobble while perched on the footer S */
     var tt=now/1000;

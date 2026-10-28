@@ -106,6 +106,13 @@ html.cvloading,html.cvloading body{overflow:hidden}
 @keyframes cvrise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.cv-half,.cv-c,.cv-seam{transition-duration:.01s}.cv-eyebrow,.cv-t span{animation:none}}
 
+/* phone motion tilt: while the gyroscope is live the cards follow it instead of swaying on their own */
+html.tilt-live .sp-3d{animation:none}
+html.tilt-live .sp-glare{opacity:1}
+#tiltBtn{position:fixed;z-index:90;right:max(16px,calc(env(safe-area-inset-right,0px) + 16px));bottom:calc(16px + env(safe-area-inset-bottom,0px));width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:rgba(13,17,36,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--lamp);display:grid;place-items:center;padding:0;cursor:pointer;animation:pillpulse 2s ease-in-out infinite}
+#tiltBtn svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+html.cvloading #tiltBtn{display:none}
+
 /* nav */
 header.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(7,9,20,.72);border-bottom:1px solid var(--line)}
 .nav .wrap{display:flex;align-items:center;gap:24px;padding-block:14px}
@@ -699,6 +706,21 @@ lb.addEventListener('click',e=>{if(e.target===lb)lb.close();});
     c.addEventListener('pointerleave',function(){t.classList.remove('live');t.style.setProperty('--ry','0deg');t.style.setProperty('--rx','0deg');});
   });
 })();
+/* speaker cards follow the phone's tilt */
+(function(){
+  var cards=[].slice.call(document.querySelectorAll('.sp-3d'));
+  if(!cards.length)return;
+  (function loop(){
+    requestAnimationFrame(loop);
+    var T=window.PhoneTilt;if(!T||!T.active)return;
+    cards.forEach(function(t){
+      t.classList.add('live');
+      t.style.setProperty('--ry',(T.x*20).toFixed(2)+'deg');
+      t.style.setProperty('--rx',(-T.y*15).toFixed(2)+'deg');
+      t.style.setProperty('--gx',(50+T.x*45).toFixed(1)+'%');t.style.setProperty('--gy',(50+T.y*45).toFixed(1)+'%');
+    });
+  })();
+})();
 /* scroll progress */
 const bar=document.getElementById('progress');
 addEventListener('scroll',()=>{const h=document.documentElement;bar.style.transform='scaleX('+(h.scrollTop/(h.scrollHeight-h.clientHeight||1))+')';},{passive:true});
@@ -732,6 +754,7 @@ var pill=document.getElementById('nowPlaying')||document.getElementById('song-pi
 if(pill){var t=0;addEventListener('scroll',function(){if(t)return;t=requestAnimationFrame(function(){t=0;var end=scrollY+innerHeight>=document.documentElement.scrollHeight-80;pill.classList.toggle('away',end);});},{passive:true});}
 })();
 </script>
+<script src="js/tilt.js"></script>
 <script>
 /* preloader: waits for the page and the flier, fills a ring, then the curtains part. "Enter with worship" starts the song (a tap is the gesture browsers need). */
 (function(){
@@ -763,8 +786,8 @@ if(pill){var t=0;addEventListener('scroll',function(){if(t)return;t=requestAnima
     root.classList.remove('cvloading');                       /* page animations and the 3D flier start with the reveal */
     setTimeout(function(){L.remove();},reduce?50:1300);
   }
-  document.getElementById('cvSound').addEventListener('click',function(){enter(true,false);});
-  document.getElementById('cvQuiet').addEventListener('click',function(){enter(false,true);});
+  document.getElementById('cvSound').addEventListener('click',function(){if(window.PhoneTilt)PhoneTilt.enable();enter(true,false);});
+  document.getElementById('cvQuiet').addEventListener('click',function(){if(window.PhoneTilt)PhoneTilt.enable();enter(false,true);});
   addEventListener('keydown',function(e){if(e.key==='Escape')enter(false,false);});
   setTimeout(function(){enter(false,false);},10000);          /* never trap the visitor */
 })();
