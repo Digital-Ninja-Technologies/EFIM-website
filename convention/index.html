@@ -158,7 +158,8 @@ html.menu-open #song-pill{opacity:0;pointer-events:none}
   .nav .m-cta{display:block;border-bottom:0;padding-top:18px}
   .nav .m-cta .btn{width:100%;justify-content:center;margin-left:0;padding:14px 22px}
 }
-@media (max-width:560px){.nav .wrap>.btn{display:none}.nav .wrap{gap:12px}.burger{margin-left:auto}}
+.nav .wrap>.btn{margin-left:auto}
+@media (max-width:560px){.nav .wrap{gap:12px}.nav .wrap>.btn{padding:10px 16px}}
 @media (min-width:561px){.nav .m-cta{display:none!important}}
 @media (prefers-reduced-motion:reduce){.burger span,.nav ul,.nav ul li{transition:none!important}}
 
@@ -467,17 +468,7 @@ dialog#lb button:hover{border-color:var(--lamp);color:var(--lamp)}
       <img class="logo" src="logo.webp" alt="" width="38" height="38">
       <span>The Evangel <small>Faith Mission</small></span>
     </a>
-    <ul id="navList">
-      <li><a href="https://efim-website.vercel.app/">Home</a></li>
-      <li><a href="https://efim-website.vercel.app/#gather">Gatherings</a></li>
-      <li><a href="https://efim-website.vercel.app/#ministries">Ministries</a></li>
-      <li><a href="https://efim-website.vercel.app/#branches">Branches</a></li>
-      <li><a href="./" aria-current="page">Convention</a></li>
-      <li><a href="https://efim-website.vercel.app/#pray">Prayer</a></li>
-      <li class="m-cta"><a class="btn btn-lamp" href="#register">Register <span class="arr">→</span></a></li>
-    </ul>
     <a class="btn btn-lamp" href="#register">Register <span class="arr">→</span></a>
-    <button class="burger" type="button" aria-expanded="false" aria-controls="navList" aria-label="Open menu"><span></span><span></span><span></span></button>
   </div>
 </header>
 
@@ -826,14 +817,6 @@ if(G&&!reduce){
 </script>
 <script>
 (function(){
-var nav=document.querySelector('header.nav'),btn=nav&&nav.querySelector('.burger'),list=document.getElementById('navList');
-if(!btn||!list)return;
-function set(o){nav.classList.toggle('open',o);btn.setAttribute('aria-expanded',o);btn.setAttribute('aria-label',o?'Close menu':'Open menu');document.documentElement.classList.toggle('menu-open',o);}
-btn.addEventListener('click',function(){set(!nav.classList.contains('open'));});
-list.addEventListener('click',function(e){if(e.target.closest('a'))set(false);});
-document.addEventListener('click',function(e){if(nav.classList.contains('open')&&!nav.contains(e.target))set(false);});
-addEventListener('keydown',function(e){if(e.key==='Escape'&&nav.classList.contains('open')){set(false);btn.focus();}});
-matchMedia('(min-width:1021px)').addEventListener('change',function(e){if(e.matches)set(false);});
 /* the floating music pill steps aside at the very bottom so it never covers the credit line */
 var t=0;addEventListener('scroll',function(){if(t)return;t=requestAnimationFrame(function(){t=0;var end=scrollY+innerHeight>=document.documentElement.scrollHeight-80;[].forEach.call(document.querySelectorAll('#nowPlaying,#song-pill,#tiltBtn'),function(e){e.classList.toggle('away',end);});});},{passive:true});
 })();
