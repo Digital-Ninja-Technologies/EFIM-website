@@ -12,12 +12,6 @@ The two sites link to each other with absolute URLs (search for `efim-website.ve
 
 Shared files that both sites use (`logo.webp`, `js/three.min.js`, `js/logo3d.js`, `js/giant-dock.js`) are copied into `convention/`; update both copies when you change them.
 
-## Convention registrations to a spreadsheet
-The convention site's `/api/register` (see `convention/api/register.js`) forwards each registration to a Google Sheet through a small Apps Script web app.
-
-1. Go to https://script.google.com, create a project and paste in `convention/google-apps-script/Code.gs`.
-2. Project Settings > Script Properties: add `SECRET` with a long random value.
-3. Deploy > New deployment > Web app. Execute as: Me. Who has access: Anyone. Copy the `/exec` URL.
-4. In Vercel, open the **convention** project > Settings > Environment Variables and add `SHEET_WEBHOOK_URL` (the `/exec` URL) and `SHEET_WEBHOOK_SECRET` (same value as `SECRET`), then redeploy.
-
-The first registration creates the sheet "The Evangel Faith Mission 2026 Convention Registrations". Open it in Google Sheets, or use File > Download > Microsoft Excel (.xlsx).
+## Convention registration (Google Form)
+The Register buttons on the convention site open a modal that embeds a Google Form. Paste the form's link into `window.REGISTRATION_FORM_URL` (search for it in `convention/index.html`).
+Responses can be sent to a Google Sheet from the form's Responses tab, and that sheet downloads as Excel (.xlsx).

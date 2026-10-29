@@ -288,57 +288,68 @@ html.gl .dock img{opacity:0}
 
 @media (max-width:900px){.venue{grid-template-columns:1fr}}
 
-/* registration */
-.reg{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,4vw,64px);align-items:start}
+/* registration: a call-to-action card; the form itself opens in a modal (Google Form) */
+.reg{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,4vw,64px);align-items:center}
 .reg h2{font-size:clamp(2.4rem,6vw,4.8rem);font-weight:800;margin-top:16px}
 .reg .lead{color:var(--mute);max-width:40ch;margin:20px 0 0}
 .steps{list-style:none;margin:32px 0 0;padding:0;counter-reset:s;border-top:1px solid var(--line)}
 .steps li{counter-increment:s;display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;padding:16px 0;border-bottom:1px solid var(--line);color:var(--mute);font-size:.95rem}
 .steps li::before{content:"0" counter(s);font-family:var(--f-mono);font-size:.78rem;color:var(--lamp);letter-spacing:.1em;padding-top:2px}
 .steps li b{display:block;color:var(--ink);font-family:var(--f-display);font-weight:600;font-size:1.1rem}
-.rcard{position:relative;border:1px solid var(--line);border-radius:28px;padding:clamp(22px,4vw,40px);background:radial-gradient(520px circle at var(--mx,0%) var(--my,0%),rgba(20,178,90,.2),transparent 60%),var(--night);overflow:hidden}
-.rgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-.fld{display:flex;flex-direction:column;gap:7px;min-width:0}
-.fld.full{grid-column:1/-1}
-.fld>label,.fld>legend{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--lamp);padding:0}
-fieldset.fld{border:0;margin:0;padding:0}
-.fld input[type=text],.fld input[type=tel],.fld input[type=email],.fld select{font:inherit;color:var(--ink);background:var(--deep);border:1px solid var(--line);border-radius:14px;padding:14px 16px;width:100%;transition:border-color .25s,box-shadow .25s}
-.fld input::placeholder{color:#5d6485}
-.fld input:focus,.fld select:focus{outline:none;border-color:var(--lamp);box-shadow:0 0 0 4px rgba(255,178,62,.15)}
-.fld.bad input,.fld.bad select{border-color:var(--red)}
-.fld .err{min-height:1.1em;font-size:.78rem;color:#ff8a8d}
-.chips{display:flex;gap:10px;flex-wrap:wrap}
-.chip{position:relative}
-.chip input{position:absolute;opacity:0;inset:0;cursor:pointer}
-.chip span{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:10px 18px;font-weight:700;font-size:.9rem;color:var(--mute);transition:all .25s;user-select:none}
-.chip span::before{content:"";width:9px;height:9px;border-radius:50%;border:1px solid currentColor;transition:all .25s}
-.chip input:checked+span{background:var(--ink);color:var(--night);border-color:var(--ink)}
-.chip input:checked+span::before{background:var(--green);border-color:var(--green);box-shadow:0 0 10px var(--green)}
-.chip input:focus-visible+span{outline:2px solid var(--lamp);outline-offset:3px}
-.step-n{display:flex;align-items:center;gap:14px}
-.step-n button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--deep);color:var(--ink);font:inherit;font-size:1.3rem;cursor:pointer;transition:border-color .25s,background .25s}
-.step-n button:hover{border-color:var(--lamp);background:rgba(255,178,62,.1)}
-.step-n output{min-width:2ch;text-align:center;font-family:var(--f-display);font-size:1.8rem;font-weight:800;font-variant-numeric:tabular-nums}
-.rfoot{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:26px}
-.ferr{margin:18px 0 0;color:#ff8a8d;font-size:.9rem;min-height:0}
-.ferr:empty{display:none}
-.rfoot small{color:var(--mute);font-size:.8rem;max-width:34ch}
-.ticket{display:none;position:relative}
-.rcard.done form{display:none}
-.rcard.done .ticket{display:block}
-.tk{border:1px dashed var(--lamp);border-radius:22px;padding:clamp(22px,4vw,34px);background:linear-gradient(160deg,rgba(255,178,62,.14),rgba(20,178,90,.14)),var(--deep);position:relative;overflow:hidden}
-.tk::before,.tk::after{content:"";position:absolute;top:58%;width:26px;height:26px;border-radius:50%;background:var(--night);border:1px dashed var(--lamp)}
-.tk::before{left:-14px}.tk::after{right:-14px}
-.tk h3{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;margin-top:12px}
-.tk dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:26px 0 0}
-.tk dt{font-family:var(--f-mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--lamp)}
-.tk dd{margin:4px 0 0;font-family:var(--f-display);font-size:1.1rem;font-weight:600;overflow-wrap:anywhere}
-.tk .ref{font-family:var(--f-mono);letter-spacing:.2em}
-.tk .note{margin:22px 0 0;color:var(--mute);font-size:.85rem}
-.ticket .btn{margin-top:20px}
+.rcard{position:relative;display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1fr);gap:clamp(18px,3vw,36px);align-items:center;border:1px solid rgba(255,178,62,.35);border-radius:28px;padding:clamp(22px,4vw,40px);background:radial-gradient(520px circle at 0% 0%,rgba(20,178,90,.3),transparent 60%),radial-gradient(420px circle at 100% 100%,rgba(255,178,62,.14),transparent 60%),var(--night);overflow:hidden}
+.rcard img{display:block;width:100%;height:auto;border-radius:14px;border:1px solid rgba(109,255,156,.35);box-shadow:0 24px 60px rgba(20,178,90,.28);transform:rotate(-3deg);transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.rcard:hover img{transform:rotate(0) scale(1.03)}
+.rcard h3{font-size:clamp(1.8rem,3.4vw,2.6rem);font-weight:800;margin:10px 0 0}
+.rcard p{color:var(--mute);margin:12px 0 22px}
 @media (max-width:900px){.reg{grid-template-columns:1fr}}
-@media (max-width:560px){.rgrid,.tk dl{grid-template-columns:1fr}}
+@media (max-width:560px){.rcard{grid-template-columns:1fr}.rcard img{max-width:220px;margin-inline:auto}}
 
+/* registration modal: the page behind is replaced by a blurred, drifting copy of the flier's green-and-gold clouds */
+html.rm-open{overflow:hidden}
+dialog#regModal{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:transparent;color:var(--ink);overflow:hidden;opacity:0;transition:opacity .35s}
+dialog#regModal[open]{opacity:1}
+dialog#regModal.closing{opacity:0}
+dialog#regModal::backdrop{background:#020a05}
+.rm-bg{position:absolute;inset:0;overflow:hidden;background:#031007}
+.rm-art{position:absolute;inset:-14%;background:url(images/convention-flier-2026.webp) center 32%/cover;filter:blur(36px) saturate(1.45) brightness(1.05);opacity:.7;animation:rmdrift 20s ease-in-out infinite alternate}
+.rm-glow{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
+.rm-glow.a{width:60vmax;height:60vmax;left:-20vmax;top:-22vmax;background:rgba(20,178,90,.5);animation:drift 14s ease-in-out infinite alternate}
+.rm-glow.b{width:46vmax;height:46vmax;right:-16vmax;bottom:-18vmax;background:rgba(255,178,62,.3);animation:drift 14s -6s ease-in-out infinite alternate}
+.rm-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 40%,transparent 35%,rgba(2,10,5,.75) 100%)}
+@keyframes rmdrift{to{transform:scale(1.18) translate(3%,-2%)}}
+.rm-x{position:absolute;z-index:3;right:max(14px,env(safe-area-inset-right,0px));top:max(14px,env(safe-area-inset-top,0px));width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.28);background:rgba(7,9,20,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#fff;font-size:1.1rem;cursor:pointer;transition:border-color .25s,color .25s,transform .35s}
+.rm-x:hover{border-color:var(--lamp);color:var(--lamp);transform:rotate(90deg)}
+.rm-wrap{position:relative;z-index:1;height:100%;max-width:1120px;margin:0 auto;padding:clamp(14px,3vw,40px);display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);gap:clamp(18px,4vw,56px);align-items:center}
+.rm-side{text-align:center}
+.rm-flier{position:relative;width:min(300px,100%);aspect-ratio:863/1080;margin:0 auto 26px;perspective:1100px}
+.rm-card{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(var(--rx,4deg)) rotateY(var(--ry,-12deg));transition:transform .5s cubic-bezier(.2,.7,.2,1);animation:rmfloat 6s ease-in-out infinite;will-change:transform}
+.rm-card.live{transition:transform .09s linear;animation:none}
+.rm-card b,.rm-card i,.rm-card u{position:absolute;inset:0;display:block;border-radius:12px}
+.rm-card b{background:url(images/convention-flier-2026.webp) center/cover;box-shadow:0 0 0 1px rgba(255,214,120,.7),0 40px 80px rgba(0,0,0,.55),0 0 60px rgba(20,178,90,.4);transform:translateZ(7px)}
+.rm-card i{background:#c8922a}
+.rm-card u{background:linear-gradient(160deg,#0b3a22,#04140c);box-shadow:inset 0 0 0 3px rgba(255,178,62,.7);transform:translateZ(-8px) rotateY(180deg)}
+@keyframes rmfloat{0%,100%{transform:rotateX(4deg) rotateY(-14deg) translateY(0)}50%{transform:rotateX(-2deg) rotateY(12deg) translateY(-12px)}}
+.rm-t{font-family:var(--f-display);font-weight:800;font-size:clamp(1.8rem,3.2vw,2.8rem);line-height:.95;margin:14px 0 0}
+.rm-t span{background:linear-gradient(100deg,#ffe28a 5%,var(--lamp) 45%,#ff9a2e 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.rm-d{color:#cfe3d6;margin:16px 0 0;font-size:.95rem}
+.rm-main{display:flex;flex-direction:column;height:min(88vh,840px);border:1px solid rgba(255,178,62,.4);border-radius:26px;overflow:hidden;background:rgba(7,9,20,.6);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 40px 100px rgba(0,0,0,.6)}
+.rm-main header{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;padding:16px 22px;border-bottom:1px solid rgba(255,255,255,.12)}
+.rm-main h2{font-size:1.5rem;font-weight:800}
+.rm-main header span{font-family:var(--f-mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--lamp)}
+.rm-frame{position:relative;flex:1;min-height:0;background:#fff}
+.rm-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;opacity:0;transition:opacity .4s}
+.rm-frame.ready iframe{opacity:1}
+.rm-load,.rm-empty{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:28px;color:#26382c;font-weight:600}
+.rm-frame.ready .rm-load{display:none}
+.rm-empty{background:linear-gradient(160deg,#0a2b18,#06140c);color:#cfe3d6}
+.rm-empty b{display:block;font-family:var(--f-display);font-size:1.6rem;color:var(--ink);margin-bottom:8px}
+.rm-empty a{color:var(--lamp);font-weight:700}
+.rm-main footer{padding:12px 22px;border-top:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.85rem}
+.rm-main footer a{color:var(--lamp);font-weight:700;text-decoration:none}
+.rm-main footer a:hover{text-decoration:underline}
+@media (max-width:900px){.rm-wrap{grid-template-columns:1fr;align-content:center;padding-top:64px}.rm-side{display:none}.rm-main{height:min(86vh,760px)}}
+@media (max-width:560px){.rm-wrap{padding:60px 10px 10px}.rm-main{border-radius:20px;height:calc(100vh - 80px);height:calc(100dvh - 80px)}}
+@media (prefers-reduced-motion:reduce){.rm-art,.rm-glow,.rm-card{animation:none}dialog#regModal{transition:none}}
 /* venue: aerial video of Faith Plaza with an animated location pin dropped on it */
 .aerial{position:relative;aspect-ratio:4/3;border-radius:28px;overflow:hidden;border:1px solid rgba(109,255,156,.3);background:radial-gradient(70% 60% at 50% 45%,rgba(20,178,90,.28),transparent 70%),repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 38px),repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px 38px),#08140e;box-shadow:0 30px 80px rgba(20,178,90,.18)}
 .pano-frame{position:absolute;inset:0;width:100%;height:100%;border:0;display:none;background:#08140e}
@@ -592,34 +603,18 @@ dialog#lb button:hover{border-color:var(--lamp);color:var(--lamp)}
         <h2>Save your <em class="s">seat</em></h2>
         <p class="lead">Let us know you are coming to the 2026 National Convention so we can prepare for you, your family and your friends.</p>
         <ol class="steps">
+          <li><div><b>Open the form</b>It opens right here, no need to leave the page.</div></li>
           <li><div><b>Tell us who is coming</b>Your details and how many will attend.</div></li>
-          <li><div><b>Choose your days</b>Come for one day or all three, Friday to Sunday.</div></li>
-          <li><div><b>Get your reference</b>Keep it handy and show it at the door.</div></li>
+          <li><div><b>Submit</b>That is it. We will be expecting you.</div></li>
         </ol>
       </div>
-      <div class="rcard rv" id="rcard" style="--d:.12s">
-        <form id="regForm" novalidate>
-          <div class="rgrid">
-            <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
-            <div class="fld"><label for="rName">Full name</label><input id="rName" name="name" type="text" autocomplete="name" placeholder="Your name" required><span class="err" aria-live="polite"></span></div>
-            <div class="fld"><label for="rPhone">Phone</label><input id="rPhone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="080 0000 0000" required><span class="err" aria-live="polite"></span></div>
-            <div class="fld"><label for="rEmail">Email <span style="color:var(--mute);text-transform:none;letter-spacing:0">(optional)</span></label><input id="rEmail" name="email" type="email" autocomplete="email" placeholder="you@example.com"><span class="err" aria-live="polite"></span></div>
-            <div class="fld"><label for="rBranch">Your branch</label><select id="rBranch" name="branch" required><option value="">Choose a branch</option><option>Lagos</option><option>Ibadan</option><option>Delta</option><option>Abeokuta</option><option>Visiting from elsewhere</option></select><span class="err" aria-live="polite"></span></div>
-            <fieldset class="fld full"><legend>Days you will attend</legend>
-              <div class="chips"><label class="chip"><input type="checkbox" name="day" value="Fri 20 Nov" checked><span>Fri 20</span></label><label class="chip"><input type="checkbox" name="day" value="Sat 21 Nov" checked><span>Sat 21</span></label><label class="chip"><input type="checkbox" name="day" value="Sun 22 Nov" checked><span>Sun 22</span></label></div><span class="err" id="dayErr" aria-live="polite"></span></fieldset>
-            <div class="fld"><span class="fld-l" id="gl" style="font-family:var(--f-mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--lamp)">People attending</span>
-              <div class="step-n" role="group" aria-labelledby="gl"><button type="button" id="gMinus" aria-label="One fewer person">−</button><output id="gOut" aria-live="polite">1</output><button type="button" id="gPlus" aria-label="One more person">+</button></div></div>
-            <fieldset class="fld"><legend>First time with us?</legend>
-              <div class="chips"><label class="chip"><input type="radio" name="first" value="Yes"><span>Yes</span></label><label class="chip"><input type="radio" name="first" value="No" checked><span>No</span></label></div></fieldset>
-          </div>
-          <p class="ferr" id="formErr" role="alert"></p>
-          <div class="rfoot"><button class="btn btn-lamp" type="submit">Register <span class="arr">→</span></button><small>Your details go straight to the church's registration sheet.</small></div>
-        </form>
-        <div class="ticket" id="ticket" aria-live="polite" tabindex="-1">
-          <div class="tk"><div class="eyebrow">You are on the list</div><h3 id="tkName">See you there</h3>
-            <dl><div><dt>Reference</dt><dd class="ref" id="tkRef">-</dd></div><div><dt>Branch</dt><dd id="tkBranch">-</dd></div><div><dt>Days</dt><dd id="tkDays">-</dd></div><div><dt>People</dt><dd id="tkPeople">-</dd></div></dl>
-            <p class="note">Faith Plaza, CM Bariga Road, opp. Dada Street, Bariga Road, Lagos.</p></div>
-          <button class="btn btn-ghost" id="rAgain" type="button">Register someone else</button>
+      <div class="rcard rv" style="--d:.12s">
+        <img src="images/convention-flier-2026.webp" alt="" width="863" height="1080" loading="lazy">
+        <div>
+          <div class="eyebrow">2026 National Convention</div>
+          <h3>Registration is open</h3>
+          <p>Fri 20 – Sun 22 November 2026 · Faith Plaza, Bariga, Lagos.</p>
+          <button class="btn btn-lamp" type="button" data-open-reg>Open the registration form <span class="arr">→</span></button>
         </div>
       </div>
     </div>
@@ -653,6 +648,23 @@ dialog#lb button:hover{border-color:var(--lamp);color:var(--lamp)}
 <div class="credit"><div class="wrap"><p>Designed &amp; developed by <a href="https://www.thedigitalninjatech.com" target="_blank" rel="noopener">The Digital Ninja Technologies Agency</a></p></div></div>
 </footer>
 
+<dialog id="regModal" aria-labelledby="rmTitle">
+  <div class="rm-bg" aria-hidden="true"><i class="rm-art"></i><i class="rm-glow a"></i><i class="rm-glow b"></i></div>
+  <button class="rm-x" id="rmClose" type="button" aria-label="Close registration">✕</button>
+  <div class="rm-wrap" id="rmWrap">
+    <aside class="rm-side" aria-hidden="true">
+      <div class="rm-flier"><div class="rm-card" id="rmCard"><b></b><i style="transform:translateZ(-0.9px)"></i><i style="transform:translateZ(-1.8px)"></i><i style="transform:translateZ(-2.7px)"></i><i style="transform:translateZ(-3.6px)"></i><i style="transform:translateZ(-4.5px)"></i><i style="transform:translateZ(-5.4px)"></i><i style="transform:translateZ(-6.3px)"></i><u></u></div></div>
+      <div class="eyebrow">2026 National Convention</div>
+      <p class="rm-t">New things<br><span>by His Spirit</span></p>
+      <p class="rm-d">Fri 20 – Sun 22 November 2026<br>Faith Plaza, Bariga, Lagos</p>
+    </aside>
+    <section class="rm-main">
+      <header><h2 id="rmTitle">Register</h2><span>2026 National Convention</span></header>
+      <div class="rm-frame" id="rmFrame"><div class="rm-load">Loading the form…</div></div>
+      <footer><a id="rmOpen" href="#" target="_blank" rel="noopener" hidden>Open the form in a new tab ↗</a><span style="color:#8fb59d">Having trouble? Use the link, or message us on Instagram.</span></footer>
+    </section>
+  </div>
+</dialog>
 <dialog id="lb" aria-label="Convention flier"><button type="button" id="lbClose">Close ✕</button><img src="images/convention-flier-2026.webp" alt="Full 2026 National Convention flier"></dialog>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -698,51 +710,57 @@ document.getElementById('flierBtn').addEventListener('click',()=>lb.showModal&&l
 document.getElementById('lbClose').addEventListener('click',()=>lb.close());
 lb.addEventListener('click',e=>{if(e.target===lb)lb.close();});
 
-/* registration: posts to /api/register, which appends a row to the church's sheet */
+/* registration modal: opens from every Register button and shows the Google Form. Paste the form's link below. */
+window.REGISTRATION_FORM_URL=window.REGISTRATION_FORM_URL||'';
 (function(){
-  const form=document.getElementById('regForm'),card=document.getElementById('rcard'),tk=document.getElementById('ticket');
-  const out=document.getElementById('gOut');let n=1;
-  const bump=()=>{out.textContent=n;if(G&&!reduce)G.fromTo(out,{scale:1.35},{scale:1,duration:.35,ease:'back.out(3)'});};
-  document.getElementById('gMinus').addEventListener('click',()=>{n=Math.max(1,n-1);bump();});
-  document.getElementById('gPlus').addEventListener('click',()=>{n=Math.min(20,n+1);bump();});
-  const setErr=(el,msg)=>{const f=el.closest('.fld');f.classList.toggle('bad',!!msg);f.querySelector('.err').textContent=msg||'';};
-  const checks={
-    rName:v=>v.trim().length<2?'Please enter your name.':'',
-    rPhone:v=>v.replace(/\D/g,'').length<7?'Please enter a phone number we can reach.':'',
-    rEmail:v=>v&&!/^\S+@\S+\.\S+$/.test(v)?'That email does not look right.':'',
-    rBranch:v=>!v?'Please choose a branch.':''
-  };
-  Object.keys(checks).forEach(id=>{const el=document.getElementById(id);el.addEventListener('blur',()=>setErr(el,checks[id](el.value)));el.addEventListener('input',()=>{if(el.closest('.fld').classList.contains('bad'))setErr(el,checks[id](el.value));});});
-  const btn=form.querySelector('button[type=submit]'),formErr=document.getElementById('formErr');
-  form.addEventListener('submit',async e=>{
-    e.preventDefault();let bad=null;
-    Object.keys(checks).forEach(id=>{const el=document.getElementById(id);const m=checks[id](el.value);setErr(el,m);if(m&&!bad)bad=el;});
-    const days=[...form.querySelectorAll('input[name=day]:checked')].map(i=>i.value);
-    document.getElementById('dayErr').textContent=days.length?'':'Choose at least one day.';
-    if(!days.length&&!bad)bad=form.querySelector('input[name=day]');
-    if(bad){bad.focus();return;}
-    const get=id=>document.getElementById(id).value.trim();
-    const first=form.querySelector('input[name=first]:checked').value;
-    formErr.textContent='';btn.disabled=true;btn.firstChild.textContent='Sending ';
-    try{
-      const res=await fetch('/api/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:get('rName'),phone:get('rPhone'),email:get('rEmail'),branch:get('rBranch'),days,people:n,firstTime:first,website:form.elements.website.value})});
-      const data=await res.json().catch(()=>({}));
-      if(!res.ok||!data.ok)throw new Error(data.error||'failed');
-      document.getElementById('tkName').textContent='See you there, '+get('rName').split(/\s+/)[0];
-      document.getElementById('tkRef').textContent=data.ref;
-      document.getElementById('tkBranch').textContent=get('rBranch');
-      document.getElementById('tkDays').textContent=days.map(d=>d.replace(' Nov','')).join(' · ');
-      document.getElementById('tkPeople').textContent=n+(n===1?' person':' people')+(first==='Yes'?' · first time':'');
-      card.classList.add('done');tk.focus({preventScroll:true});
-      if(G&&!reduce){G.from('.tk',{y:40,rotate:-3,opacity:0,duration:.9,ease:'back.out(1.6)'});G.from('.tk dl>div,.tk .note,#rAgain',{y:16,opacity:0,duration:.5,stagger:.08,delay:.35,ease:'power3.out'});}
-    }catch(err){
-      formErr.textContent=err.message==='not_configured'?'Online registration is not switched on yet. Please contact the church to register.':err.message==='invalid'?'Some details look wrong. Please check the form and try again.':'We could not complete your registration. Please check your connection and try again.';
-    }finally{btn.disabled=false;btn.firstChild.textContent='Register ';}
+  var dlg=document.getElementById('regModal'),frame=document.getElementById('rmFrame'),openLink=document.getElementById('rmOpen'),card=document.getElementById('rmCard');
+  if(!dlg)return;
+  var root=document.documentElement,built=false,reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function embed(u){
+    try{var x=new URL(u);if(/docs\.google\.com$/.test(x.hostname)&&/\/forms\//.test(x.pathname)){x.searchParams.set('embedded','true');return x.href;}}catch(e){}
+    return u;
+  }
+  function build(){
+    if(built)return;built=true;
+    var url=(window.REGISTRATION_FORM_URL||'').trim();
+    if(!url){
+      frame.innerHTML='<div class="rm-empty"><div><b>Registration opens very soon</b>The form is being set up. In the meantime, message us on <a href="https://www.instagram.com/evangelfaithmission/" target="_blank" rel="noopener">Instagram</a> or <a href="https://www.facebook.com/theevangelfaithinternationalmission/" target="_blank" rel="noopener">Facebook</a> and we will register you.</div></div>';
+      return;
+    }
+    var f=document.createElement('iframe');
+    f.src=embed(url);f.title='2026 National Convention registration form';f.setAttribute('loading','lazy');
+    f.addEventListener('load',function(){frame.classList.add('ready');});
+    frame.appendChild(f);
+    openLink.href=url;openLink.hidden=false;
+  }
+  function openM(){
+    build();
+    if(!dlg.open)dlg.showModal();
+    dlg.classList.remove('closing');root.classList.add('rm-open');
+    document.getElementById('rmClose').focus({preventScroll:true});
+  }
+  function closeM(){
+    if(!dlg.open)return;
+    dlg.classList.add('closing');
+    setTimeout(function(){dlg.close();dlg.classList.remove('closing');root.classList.remove('rm-open');},reduce?0:320);
+  }
+  [].forEach.call(document.querySelectorAll('a[href="#register"],[data-open-reg]'),function(el){
+    el.addEventListener('click',function(e){e.preventDefault();openM();});
   });
-  document.getElementById('rAgain').addEventListener('click',()=>{form.reset();n=1;out.textContent=1;card.classList.remove('done');document.getElementById('rName').focus();});
-  card.addEventListener('pointermove',e=>{const r=card.getBoundingClientRect();card.style.setProperty('--mx',(e.clientX-r.left)+'px');card.style.setProperty('--my',(e.clientY-r.top)+'px');});
+  document.getElementById('rmClose').addEventListener('click',closeM);
+  dlg.addEventListener('cancel',function(e){e.preventDefault();closeM();});
+  dlg.addEventListener('click',function(e){if(e.target===dlg||e.target.id==='rmWrap')closeM();});
+  /* the flier on the side turns toward the pointer, or follows the phone's tilt */
+  if(card&&!reduce){
+    dlg.addEventListener('pointermove',function(e){
+      if(e.pointerType==='touch')return;
+      var x=e.clientX/innerWidth-.5,y=e.clientY/innerHeight-.5;
+      card.classList.add('live');card.style.setProperty('--ry',(x*34).toFixed(1)+'deg');card.style.setProperty('--rx',(-y*22).toFixed(1)+'deg');
+    });
+    dlg.addEventListener('pointerleave',function(){card.classList.remove('live');card.style.removeProperty('--ry');card.style.removeProperty('--rx');});
+    (function loop(){requestAnimationFrame(loop);var T=window.PhoneTilt;if(!dlg.open||!T||!T.active)return;card.classList.add('live');card.style.setProperty('--ry',(T.x*26).toFixed(1)+'deg');card.style.setProperty('--rx',(-T.y*18).toFixed(1)+'deg');})();
+  }
 })();
-
 /* 3D speaker cards: tilt toward the pointer, glare follows it */
 (function(){
   if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
