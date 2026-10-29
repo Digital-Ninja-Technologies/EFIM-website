@@ -131,7 +131,7 @@ header.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);-webkit-b
 .btn .arr{transition:transform .25s}
 .btn:hover .arr{transform:translateX(4px)}
 .brand span,.nav .btn{white-space:nowrap}
-@media (max-width:480px){.brand small{display:none}}
+@media (max-width:560px){.brand span{display:flex;flex-direction:column;line-height:1.08;font-size:1rem}.brand small{font-size:.95rem}}
 /* mobile menu: burger toggles the link list as a slide-down panel */
 .burger{display:none;width:44px;height:44px;margin-left:8px;border-radius:50%;border:1px solid var(--line);background:rgba(13,17,36,.7);cursor:pointer;position:relative;flex:none;color:var(--ink);padding:0}
 .burger span{position:absolute;left:12px;right:12px;height:2px;background:currentColor;border-radius:2px;transition:transform .35s cubic-bezier(.2,.7,.2,1),opacity .2s,top .35s}
@@ -145,7 +145,7 @@ html.menu-open{overflow:hidden}
 #nowPlaying,#song-pill,#tiltBtn{transition:opacity .3s,transform .3s}
 #nowPlaying.away,#song-pill.away,#tiltBtn.away{opacity:0!important;pointer-events:none;transform:translateY(24px)}
 html.menu-open #song-pill{opacity:0;pointer-events:none}
-@media (max-width:820px){
+@media (max-width:1020px){
   .burger{display:block}
   .nav .btn{margin-left:auto;padding:10px 16px}
   .nav ul{position:absolute;top:100%;left:0;right:0;display:flex;flex-direction:column;gap:0;margin:0;padding:6px max(16px,env(safe-area-inset-left,0px)) 24px;background:rgba(7,9,20,.98);border-bottom:1px solid var(--line);max-height:calc(100vh - 72px);max-height:calc(100dvh - 72px);overflow-y:auto;opacity:0;visibility:hidden;transform:translateY(-10px);transition:opacity .3s,transform .3s,visibility 0s .3s}
@@ -782,7 +782,7 @@ btn.addEventListener('click',function(){set(!nav.classList.contains('open'));});
 list.addEventListener('click',function(e){if(e.target.closest('a'))set(false);});
 document.addEventListener('click',function(e){if(nav.classList.contains('open')&&!nav.contains(e.target))set(false);});
 addEventListener('keydown',function(e){if(e.key==='Escape'&&nav.classList.contains('open')){set(false);btn.focus();}});
-matchMedia('(min-width:821px)').addEventListener('change',function(e){if(e.matches)set(false);});
+matchMedia('(min-width:1021px)').addEventListener('change',function(e){if(e.matches)set(false);});
 /* the floating music pill steps aside at the very bottom so it never covers the credit line */
 var t=0;addEventListener('scroll',function(){if(t)return;t=requestAnimationFrame(function(){t=0;var end=scrollY+innerHeight>=document.documentElement.scrollHeight-80;[].forEach.call(document.querySelectorAll('#nowPlaying,#song-pill,#tiltBtn'),function(e){e.classList.toggle('away',end);});});},{passive:true});
 })();
