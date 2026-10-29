@@ -340,8 +340,18 @@ fieldset.fld{border:0;margin:0;padding:0}
 
 /* venue: aerial video of Faith Plaza with an animated location pin dropped on it */
 .aerial{position:relative;aspect-ratio:4/3;border-radius:28px;overflow:hidden;border:1px solid rgba(109,255,156,.3);background:radial-gradient(70% 60% at 50% 45%,rgba(20,178,90,.28),transparent 70%),repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 38px),repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px 38px),#08140e;box-shadow:0 30px 80px rgba(20,178,90,.18)}
-.aerial video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.aerial.novideo video{display:none}
+.pano-frame{position:absolute;inset:0;width:100%;height:100%;border:0;display:none;background:#08140e}
+.aerial.live .pano-frame{display:block}
+.pano-cover{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;background:none;color:inherit;font:inherit;cursor:pointer;text-align:left}
+.aerial.live .pano-cover,.aerial.live .aer-shade{display:none}
+.aer-cta{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);display:inline-flex;align-items:center;gap:10px;font-family:var(--f-body);font-weight:700;font-size:.9rem;color:var(--night);background:var(--lamp);border-radius:999px;padding:11px 20px;white-space:nowrap;box-shadow:0 10px 30px rgba(0,0,0,.45);transition:background .25s,transform .25s}
+.pano-cover:hover .aer-cta,.pano-cover:focus-visible .aer-cta{background:var(--ink);transform:translateX(-50%) translateY(-2px)}
+.aer-cta svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.aer-open{position:absolute;right:14px;bottom:14px;z-index:2;display:none;font-family:var(--f-mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:#fff;background:rgba(7,9,20,.7);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:7px 12px}
+.aerial.live .aer-open{display:inline-block}
+.aer-hint{position:absolute;left:50%;top:16px;z-index:2;transform:translateX(-50%);font-family:var(--f-mono);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:#fff;background:rgba(7,9,20,.7);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:7px 14px;pointer-events:none;opacity:0;white-space:nowrap}
+.aerial.live .aer-hint{animation:hint 4.5s ease forwards}
+@keyframes hint{0%{opacity:0}12%,80%{opacity:1}100%{opacity:0}}
 .aer-shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(7,9,20,.35) 0%,transparent 28%,transparent 55%,rgba(7,9,20,.75) 100%)}
 .aer-badge{position:absolute;left:16px;top:16px;font-family:var(--f-mono);font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);background:rgba(7,9,20,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:6px 12px}
 .aer-badge::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--red);margin-right:8px;animation:pulse 1.4s ease-in-out infinite}
@@ -367,7 +377,7 @@ fieldset.fld{border:0;margin:0;padding:0}
 @keyframes pinring{0%{transform:scale(.2,.1);opacity:.9}100%{transform:scale(1.15,.55);opacity:0}}
 @keyframes pinlbl{to{opacity:1;transform:none}}
 @media (max-width:560px){.aer-lbl{font-size:.88rem;padding:6px 10px}.aer-pin{width:38px;height:50px}}
-@media (prefers-reduced-motion:reduce){.aerial .aer-pin svg{opacity:1;animation:none!important}.aerial .aer-pin::after,.aerial .aer-lbl{opacity:1;animation:none!important;transform:none}.aer-badge::before{animation:none}}
+@media (prefers-reduced-motion:reduce){.aerial.live .aer-hint{animation:none;opacity:1}.aerial .aer-pin svg{opacity:1;animation:none!important}.aerial .aer-pin::after,.aerial .aer-lbl{opacity:1;animation:none!important;transform:none}.aer-badge::before{animation:none}}
 
 /* closing call */
 .close-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,6vw,96px);align-items:center}
@@ -559,14 +569,18 @@ dialog#lb button:hover{border-color:var(--lamp);color:var(--lamp)}
         <div class="ctas"><a class="btn btn-lamp" href="https://www.google.com/maps/search/?api=1&query=Faith+Plaza+CM+Bariga+Road+opp+Dada+Street+Bariga+Lagos" target="_blank" rel="noopener">Open in Maps <span class="arr">→</span></a></div>
       </div>
       <div class="aerial rv" style="--d:.15s" id="aerial">
-        <video id="aerialVid" src="images/faith-plaza-aerial.mp4" muted loop playsinline preload="metadata" aria-label="Aerial view of Faith Plaza, Bariga, Lagos"></video>
-        <div class="aer-shade" aria-hidden="true"></div>
-        <span class="aer-badge">Aerial view</span>
-        <div class="aer-pin" aria-hidden="true">
-          <i class="ring"></i><i class="ring r2"></i>
-          <svg viewBox="0 0 48 64"><path d="M24 2C11.8 2 2 11.6 2 23.4 2 39.5 24 62 24 62s22-22.5 22-38.6C46 11.6 36.2 2 24 2z"/><circle cx="24" cy="23" r="8.5"/></svg>
-          <span class="aer-lbl">Faith Plaza<small>BARIGA · LAGOS</small></span>
-        </div>
+        <button class="pano-cover" id="panoGo" type="button" aria-label="Explore Faith Plaza in 360 degrees">
+          <span class="aer-badge">360° view</span>
+          <span class="aer-shade" aria-hidden="true"></span>
+          <span class="aer-pin" aria-hidden="true">
+            <i class="ring"></i><i class="ring r2"></i>
+            <svg viewBox="0 0 48 64"><path d="M24 2C11.8 2 2 11.6 2 23.4 2 39.5 24 62 24 62s22-22.5 22-38.6C46 11.6 36.2 2 24 2z"/><circle cx="24" cy="23" r="8.5"/></svg>
+            <span class="aer-lbl">Faith Plaza<small>BARIGA · LAGOS</small></span>
+          </span>
+          <span class="aer-cta"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Explore in 360°</span>
+        </button>
+        <span class="aer-hint" aria-hidden="true">Drag to look around</span>
+        <a class="aer-open" href="https://www.google.com/local/place/fid/0x103b8d0570922f79:0xc7c9f142b0f183d3/photosphere?iu=https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid%3DB8r43XEylOBD_35Li_qx1A%26cb_client%3Dlu.gallery.gps%26w%3D160%26h%3D106%26yaw%3D48.64903%26pitch%3D0%26thumbfov%3D100&amp;ik=CAISFkI4cjQzWEV5bE9CRF8zNUxpX3F4MUE%3D" target="_blank" rel="noopener">Open full view ↗</a>
       </div>
     </div>
   </section>
@@ -765,19 +779,19 @@ lb.addEventListener('click',e=>{if(e.target===lb)lb.close();});
     });
   });
 })();
-/* aerial video: plays while the card is on screen (still frame for reduced motion); if the file is missing the map-style backdrop stays */
+/* 360 view of Faith Plaza (Google Street View photosphere). It loads only when asked, so the page stays light and a touch-scroll is never trapped by the embed. */
 (function(){
-  var box=document.getElementById('aerial'),v=document.getElementById('aerialVid');
-  if(!box||!v)return;
-  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  v.addEventListener('error',function(){box.classList.add('novideo');});
-  if(!('IntersectionObserver' in window)||reduce)return;
-  new IntersectionObserver(function(es){
-    es.forEach(function(en){
-      if(en.isIntersecting){var p=v.play();if(p&&p.catch)p.catch(function(){});}
-      else v.pause();
-    });
-  },{threshold:.25}).observe(box);
+  var box=document.getElementById('aerial'),go=document.getElementById('panoGo');
+  if(!box||!go)return;
+  var SRC="https://www.google.com/maps/embed?pb=!4v1730000000000!6m8!1m7!1sB8r43XEylOBD_35Li_qx1A!2m2!1d6.5349669!2d3.3884442!3f48.64903!4f0!5f0.7820865974627469";
+  go.addEventListener('click',function(){
+    if(box.classList.contains('live'))return;
+    var f=document.createElement('iframe');
+    f.className='pano-frame';f.src=SRC;f.title='360 degree view of Faith Plaza, Bariga, Lagos';
+    f.setAttribute('allowfullscreen','');f.setAttribute('loading','lazy');f.setAttribute('referrerpolicy','no-referrer-when-downgrade');
+    box.insertBefore(f,box.firstChild);
+    box.classList.add('live');
+  });
 })();
 /* scroll progress */
 const bar=document.getElementById('progress');
