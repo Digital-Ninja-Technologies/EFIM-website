@@ -529,7 +529,6 @@ dialog#lb button:hover{border-color:var(--lamp);color:var(--lamp)}
         <div class="ctas">
           <a class="btn btn-lamp" href="#register">Register now <span class="arr">→</span></a>
           <a class="btn btn-ghost" href="#venue">Get directions</a>
-          <button class="btn btn-ghost" id="addCal" type="button">Add to calendar</button>
         </div>
       </div>
       <figure class="flier">
@@ -712,12 +711,6 @@ function tick(){
   el.m.textContent=pad(Math.floor(s%3600/60));el.s.textContent=pad(s%60);
 }
 tick();setInterval(tick,1000);
-
-/* add to calendar (all-day event, Fri 20 – Sun 22 Nov 2026) */
-document.getElementById('addCal').addEventListener('click',()=>{
-  const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//The Evangel Faith Mission//Convention 2026//EN','BEGIN:VEVENT','UID:convention-2026@evangelfaithmission','DTSTAMP:20261028T000000Z','DTSTART;VALUE=DATE:20261120','DTEND;VALUE=DATE:20261123','SUMMARY:2026 National Convention: New Things By His Spirit','LOCATION:Faith Plaza\\, CM Bariga Road\\, opp. Dada Street\\, Bariga Road\\, Lagos','DESCRIPTION:The Evangel Faith Mission 2026 National Convention. Zech 4:6\\, Isa 43:19.','END:VEVENT','END:VCALENDAR'].join('\r\n');
-  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar'}));a.download='evangel-faith-mission-convention-2026.ics';document.body.appendChild(a);a.click();a.remove();
-});
 
 /* share */
 document.getElementById('shareBtn').addEventListener('click',async e=>{
