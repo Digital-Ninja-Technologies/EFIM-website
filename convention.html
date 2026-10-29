@@ -284,15 +284,8 @@ html.gl .dock img{opacity:0}
 .venue h2{font-size:clamp(2.4rem,6vw,4.8rem);font-weight:800;margin-top:16px}
 .venue address{font-style:normal;font-family:var(--f-serif);font-size:clamp(1.4rem,2.6vw,2rem);line-height:1.25;margin-top:24px}
 .venue .note{color:var(--mute);margin-top:18px;max-width:46ch}
-.pin{position:relative;aspect-ratio:1/1;max-width:420px;margin-inline:auto;width:100%;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;background:radial-gradient(closest-side,rgba(20,178,90,.22),transparent 70%)}
-.pin::before,.pin::after{content:"";position:absolute;inset:12%;border-radius:50%;border:1px solid rgba(109,255,156,.4);animation:ring 3.2s ease-out infinite}
-.pin::after{animation-delay:-1.6s}
-@keyframes ring{from{transform:scale(.55);opacity:.9}to{transform:scale(1.15);opacity:0}}
-.pin svg{width:34%;height:auto;position:relative;z-index:1;filter:drop-shadow(0 8px 24px rgba(255,178,62,.45));animation:bob 3s ease-in-out infinite}
-@keyframes bob{50%{transform:translateY(-10px)}}
-.pin svg path{fill:var(--lamp)}
-.pin svg circle{fill:var(--night)}
-@media (max-width:900px){.venue{grid-template-columns:1fr}.pin{max-width:260px}}
+
+@media (max-width:900px){.venue{grid-template-columns:1fr}}
 
 /* registration */
 .reg{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,4vw,64px);align-items:start}
@@ -345,6 +338,37 @@ fieldset.fld{border:0;margin:0;padding:0}
 @media (max-width:900px){.reg{grid-template-columns:1fr}}
 @media (max-width:560px){.rgrid,.tk dl{grid-template-columns:1fr}}
 
+/* venue: aerial video of Faith Plaza with an animated location pin dropped on it */
+.aerial{position:relative;aspect-ratio:4/3;border-radius:28px;overflow:hidden;border:1px solid rgba(109,255,156,.3);background:radial-gradient(70% 60% at 50% 45%,rgba(20,178,90,.28),transparent 70%),repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 38px),repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px 38px),#08140e;box-shadow:0 30px 80px rgba(20,178,90,.18)}
+.aerial video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.aerial.novideo video{display:none}
+.aer-shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(7,9,20,.35) 0%,transparent 28%,transparent 55%,rgba(7,9,20,.75) 100%)}
+.aer-badge{position:absolute;left:16px;top:16px;font-family:var(--f-mono);font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);background:rgba(7,9,20,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:6px 12px}
+.aer-badge::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--red);margin-right:8px;animation:pulse 1.4s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.35}}
+.aer-pin{position:absolute;left:var(--px,50%);top:var(--py,56%);width:46px;height:60px;transform:translate(-50%,-100%);pointer-events:none}
+.aer-pin svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 10px 18px rgba(0,0,0,.55));transform-origin:50% 100%;opacity:0}
+.aer-pin svg path{fill:var(--lamp);stroke:#fff;stroke-width:2.5}
+.aer-pin svg circle{fill:var(--night)}
+.aer-pin .ring{position:absolute;left:50%;bottom:0;width:96px;height:96px;margin:0 0 -48px -48px;border-radius:50%;border:2px solid rgba(255,178,62,.85);transform:scale(.2,.1);opacity:0}
+.aer-pin .r2{animation-delay:-1.1s}
+.aer-pin::after{content:"";position:absolute;left:50%;bottom:-5px;width:26px;height:9px;margin-left:-13px;border-radius:50%;background:rgba(0,0,0,.55);filter:blur(3px);opacity:0}
+.aer-lbl{position:absolute;left:calc(100% + 12px);top:4px;white-space:nowrap;font-family:var(--f-display);font-weight:800;font-size:1rem;color:#fff;background:rgba(7,9,20,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,178,62,.5);border-radius:10px;padding:7px 12px;line-height:1.1;opacity:0;transform:translateX(-8px)}
+.aer-lbl small{display:block;font-family:var(--f-mono);font-weight:400;font-size:.58rem;letter-spacing:.16em;color:var(--lamp);margin-top:3px}
+/* the pin drops in once the card has been revealed, then bobs while ripples spread from its tip */
+.aerial.in .aer-pin svg{animation:pindrop 1s cubic-bezier(.3,1.5,.5,1) .5s forwards,pinbob 2.6s ease-in-out 1.6s infinite}
+.aerial.in .aer-pin::after{animation:pinshadow 1s .5s forwards}
+.aerial.in .aer-pin .ring{animation:pinring 2.4s ease-out 1.3s infinite}
+.aerial.in .aer-pin .r2{animation-delay:.1s}
+.aerial.in .aer-lbl{animation:pinlbl .6s ease-out 1.25s forwards}
+@keyframes pindrop{0%{opacity:0;transform:translateY(-140px) scale(1.5)}60%{opacity:1;transform:translateY(6px) scale(.94,1.06)}80%{transform:translateY(-4px) scale(1.04,.96)}100%{opacity:1;transform:none}}
+@keyframes pinbob{50%{transform:translateY(-9px)}}
+@keyframes pinshadow{to{opacity:1}}
+@keyframes pinring{0%{transform:scale(.2,.1);opacity:.9}100%{transform:scale(1.15,.55);opacity:0}}
+@keyframes pinlbl{to{opacity:1;transform:none}}
+@media (max-width:560px){.aer-lbl{font-size:.88rem;padding:6px 10px}.aer-pin{width:38px;height:50px}}
+@media (prefers-reduced-motion:reduce){.aerial .aer-pin svg{opacity:1;animation:none!important}.aerial .aer-pin::after,.aerial .aer-lbl{opacity:1;animation:none!important;transform:none}.aer-badge::before{animation:none}}
+
 /* closing call */
 .close-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,6vw,96px);align-items:center}
 .close-grid .dock{margin-inline:0 auto}
@@ -389,7 +413,7 @@ dialog#lb button:hover{border-color:var(--lamp);color:var(--lamp)}
 .js .rv{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
 .js .rv.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){
-  .glow,.track,.pin::before,.pin::after,.pin svg{animation:none}
+  .glow,.track{animation:none}
   .js .rv{opacity:1;transform:none;transition:none}
   .flier button{transform:none;transition:none}
 }
@@ -534,7 +558,16 @@ dialog#lb button:hover{border-color:var(--lamp);color:var(--lamp)}
         <p class="note">Bring family and friends. Come early on Friday to find your seat and join the opening worship.</p>
         <div class="ctas"><a class="btn btn-lamp" href="https://www.google.com/maps/search/?api=1&query=Faith+Plaza+CM+Bariga+Road+opp+Dada+Street+Bariga+Lagos" target="_blank" rel="noopener">Open in Maps <span class="arr">→</span></a></div>
       </div>
-      <div class="pin rv" style="--d:.15s" aria-hidden="true"><svg viewBox="0 0 48 64"><path d="M24 0C10.7 0 0 10.4 0 23.2 0 40 24 64 24 64s24-24 24-40.8C48 10.4 37.3 0 24 0z"/><circle cx="24" cy="23" r="9"/></svg></div>
+      <div class="aerial rv" style="--d:.15s" id="aerial">
+        <video id="aerialVid" src="images/faith-plaza-aerial.mp4" muted loop playsinline preload="metadata" aria-label="Aerial view of Faith Plaza, Bariga, Lagos"></video>
+        <div class="aer-shade" aria-hidden="true"></div>
+        <span class="aer-badge">Aerial view</span>
+        <div class="aer-pin" aria-hidden="true">
+          <i class="ring"></i><i class="ring r2"></i>
+          <svg viewBox="0 0 48 64"><path d="M24 2C11.8 2 2 11.6 2 23.4 2 39.5 24 62 24 62s22-22.5 22-38.6C46 11.6 36.2 2 24 2z"/><circle cx="24" cy="23" r="8.5"/></svg>
+          <span class="aer-lbl">Faith Plaza<small>BARIGA · LAGOS</small></span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -731,6 +764,20 @@ lb.addEventListener('click',e=>{if(e.target===lb)lb.close();});
       if(window.FlierTour)FlierTour.start(c);
     });
   });
+})();
+/* aerial video: plays while the card is on screen (still frame for reduced motion); if the file is missing the map-style backdrop stays */
+(function(){
+  var box=document.getElementById('aerial'),v=document.getElementById('aerialVid');
+  if(!box||!v)return;
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  v.addEventListener('error',function(){box.classList.add('novideo');});
+  if(!('IntersectionObserver' in window)||reduce)return;
+  new IntersectionObserver(function(es){
+    es.forEach(function(en){
+      if(en.isIntersecting){var p=v.play();if(p&&p.catch)p.catch(function(){});}
+      else v.pause();
+    });
+  },{threshold:.25}).observe(box);
 })();
 /* scroll progress */
 const bar=document.getElementById('progress');
