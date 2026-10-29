@@ -752,7 +752,7 @@ html.loading,html.loading body{overflow:hidden}
         <p>Find us in Lagos or any <a href="#branches" style="color:var(--lamp)">branch</a> closest to you.</p>
       </div>
       <div class="visit-grid">
-        <div class="vcard"><div class="eyebrow">Location</div><h3>Lagos, Nigeria</h3><p>Street address <span class="tbc">TBC</span></p><a class="ln" href="https://www.google.com/maps/search/?api=1&query=The+Evangel+Faith+Mission+Lagos" target="_blank" rel="noopener">Open in Maps →</a></div>
+        <div class="vcard"><div class="eyebrow">Location</div><h3>Lagos, Nigeria</h3><p>44, Akintunde Street, Beesam Bus-stop, Mafoluku, Oshodi, Lagos, Nigeria</p><a class="ln" href="https://www.google.com/maps/search/?api=1&query=44%2C+Akintunde+Street%2C+Beesam+Bus-stop%2C+Mafoluku%2C+Oshodi%2C+Lagos%2C+Nigeria" target="_blank" rel="noopener">Open in Maps →</a></div>
         <div class="vcard"><div class="eyebrow">Online</div><h3>Facebook</h3><p>Updates, programmes and live moments from The Evangel Faith Mission.</p><a class="ln" href="https://www.facebook.com/theevangelfaithinternationalmission/" target="_blank" rel="noopener">Visit our Facebook page →</a></div>
         <div class="vcard"><div class="eyebrow">Contact</div><h3>Call or email</h3><p>Phone and email <span class="tbc">TBC</span></p><a class="ln" href="#pray">Send a message instead →</a></div>
       </div>
@@ -998,7 +998,7 @@ if(!list||!panel)return;
 
 /* Addresses, times and contacts are placeholders until the church confirms them. Set a field to a string to replace its TBC. */
 const BRANCHES=[
-  {city:'Lagos',state:'Lagos State',region:'South West',q:'Lagos',x:70,y:102,blurb:'Worship, the Word and a family that prays with you, in the heart of Lagos.',address:null,times:null,pastor:null,phone:null},
+  {city:'Lagos',state:'Lagos State',region:'South West',q:'Lagos',x:70,y:102,blurb:'Worship, the Word and a family that prays with you, in the heart of Lagos.',address:'44, Akintunde Street, Beesam Bus-stop, Mafoluku, Oshodi, Lagos, Nigeria',times:null,pastor:null,phone:null},
   {city:'Ibadan',state:'Oyo State',region:'South West',q:'Ibadan, Oyo State',x:103,y:54,blurb:'The light of the Gospel shining across the ancient city of Ibadan.',address:null,times:null,pastor:null,phone:null},
   {city:'Delta',state:'Delta State',region:'South South',q:'Delta State',x:215,y:147,blurb:'A growing family of believers in Delta State, gathered around one message.',address:null,times:null,pastor:null,phone:null},
   {city:'Abeokuta',state:'Ogun State',region:'South West',q:'Abeokuta, Ogun State',x:69,y:66,blurb:'Preaching the Word and saving the world from the Rock City, Abeokuta.',address:null,times:null,pastor:null,phone:null}
@@ -1023,7 +1023,7 @@ function render(i,animate){
   const b=BRANCHES[i];cur=i;
   tabs.forEach((t,k)=>{const on=k===i;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;if(!on)t.style.removeProperty('--p');});
   panel.setAttribute('aria-labelledby','brT'+i);
-  const maps='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent('The Evangel Faith Mission '+b.q+', Nigeria');
+  const maps='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(b.address?b.address:'The Evangel Faith Mission '+b.q+', Nigeria');
   panel.innerHTML=`<div class="br-mark" aria-hidden="true">${b.city}</div>
   <div class="br-top"><div><div class="eyebrow">Branch ${pad(i+1)} · ${b.state} · ${b.region}</div>
   <h3 class="br-city">${[...b.city].map(c=>`<span class="ch">${c}</span>`).join('')}</h3><p class="br-blurb">${b.blurb}</p></div>${mapSvg(i)}</div>
