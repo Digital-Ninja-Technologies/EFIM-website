@@ -723,6 +723,15 @@ lb.addEventListener('click',e=>{if(e.target===lb)lb.close();});
     });
   })();
 })();
+/* hovering a card sends the 3D flier sliding through it (mouse only) */
+(function(){
+  document.querySelectorAll('.sp,.vs,.day').forEach(function(c){
+    c.addEventListener('pointerenter',function(e){
+      if(e.pointerType==='touch')return;
+      if(window.FlierTour)FlierTour.start(c);
+    });
+  });
+})();
 /* scroll progress */
 const bar=document.getElementById('progress');
 addEventListener('scroll',()=>{const h=document.documentElement;bar.style.transform='scaleX('+(h.scrollTop/(h.scrollHeight-h.clientHeight||1))+')';},{passive:true});

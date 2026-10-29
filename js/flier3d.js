@@ -141,6 +141,15 @@ function initScene(){
   addEventListener('pointermove',function(e){pnx=e.clientX/vw*2-1;pny=e.clientY/vh*2-1;glare.position.x=e.clientX-vw/2;glare.position.y=-(e.clientY-vh/2);},{passive:true});
   var st={x:null,y:0,w:300,yaw:0,pitch:0,roll:0},spin=0,lastS=scrollY,lastT=performance.now();
 
+  /* card tour: hovering a card sends the flier sliding through it, in at the top edge and out past the bottom edge, then back to its route */
+  var tour=null;
+  window.FlierTour={start:function(el){
+    if(tour||!el)return;
+    var r=el.getBoundingClientRect();
+    if(r.bottom<0||r.top>innerHeight)return;
+    tour={t0:performance.now(),top:r.top+scrollY,left:r.left,w:r.width,h:r.height,dur:1600};
+  }};
+
   function frame(now){
     requestAnimationFrame(frame);
     if(document.hidden||!pivot.visible)return;
@@ -184,6 +193,22 @@ function initScene(){
       if(k.wobble)ww=Math.max(ww,w);
     });
     targetY+=Math.sin(now/1000*2.8)*9*ww;
+    var tourW=0,tourP=0;
+    if(tour){
+      var tq=(now-tour.t0)/tour.dur;
+      if(tq>=1)tour=null;
+      else{
+        tourW=clamp(Math.min(tq/.12,(1-tq)/.22),0,1);
+        tourP=easeInOut(clamp((tq-.08)/.84,0,1));
+        var fw=clamp(tour.w*.36,90,190),fh=fw*ASPECT;
+        var tx0=tour.left+tour.w*.14,tx1=tour.left+tour.w*.86;
+        var ty0=tour.top-s-fh*.55,ty1=tour.top-s+tour.h+fh*.55;
+        targetX=lerp(targetX,lerp(tx0,tx1,tourP),tourW);
+        targetY=lerp(targetY,lerp(ty0,ty1,tourP),tourW);
+        width=lerp(width,fw,tourW);
+        dw=Math.max(dw,tourW);
+      }
+    }
     var a=1-Math.pow(.0012,dt);
     if(st.x===null){st.x=targetX;st.y=targetY;st.w=width;}
     /* y is locked to the page scroll (no easing) so the flier can never trail behind the content and float over text during a fast flick */
@@ -200,6 +225,7 @@ function initScene(){
     var rollT=Math.sin(sp*.002)*.07*tSize*free;
     /* wobble while perched on the footer S */
     var tt=now/1000;
+    yawT+=Math.sin(tourP*Math.PI*2)*1.1*tourW;rollT+=-.35*tourW;pitchT+=.12*tourW;
     yawT+=Math.sin(tt*2.4)*.5*ww;pitchT+=Math.sin(tt*1.9+2)*.16*ww;rollT+=Math.sin(tt*3.3+1)*.24*ww;
     st.yaw=lerp(st.yaw,yawT,a);st.pitch=lerp(st.pitch,pitchT,a);st.roll=lerp(st.roll,rollT,a);
     /* on phones the travelling flier is tiny and see-through so it never hides copy; docked it is fully opaque */
