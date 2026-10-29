@@ -8,7 +8,7 @@ Two static sites in one repository, each its own Vercel project:
 | 2026 National Convention | `convention/` | `convention` |
 
 The main project also ends up serving a copy of `convention/` at `/convention/`; `vercel.json` marks it `noindex` so search engines only list the convention project's own address.
-The two sites link to each other with absolute URLs (search for `efim-website.vercel.app` and `efim-convention.vercel.app` if either address changes).
+The two sites link to each other with absolute URLs (search for `efim-website.vercel.app` and `efim-convention-peach.vercel.app` if either address changes).
 
 Shared files that both sites use (`logo.webp`, `js/three.min.js`, `js/logo3d.js`, `js/giant-dock.js`) are copied into `convention/`; update both copies when you change them.
 
