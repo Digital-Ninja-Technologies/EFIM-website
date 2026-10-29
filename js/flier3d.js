@@ -143,7 +143,7 @@ function initScene(){
 
   /* card tour: hovering a card sends the flier sliding through it, in at the top edge and out past the bottom edge, then back to its route */
   var tour=null;
-  window.FlierTour={start:function(el){
+  window.FlierTour={busy:function(){return !!tour;},start:function(el){
     if(tour||!el)return;
     var r=el.getBoundingClientRect();
     if(r.bottom<0||r.top>innerHeight)return;

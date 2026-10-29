@@ -723,14 +723,37 @@ lb.addEventListener('click',e=>{if(e.target===lb)lb.close();});
     });
   })();
 })();
-/* hovering a card sends the 3D flier sliding through it (mouse only) */
+/* cards send the 3D flier sliding through them: on hover with a mouse, and on phones as each card scrolls into view or is tapped */
 (function(){
-  document.querySelectorAll('.sp,.vs,.day').forEach(function(c){
+  var cards=[].slice.call(document.querySelectorAll('.sp,.vs,.day'));
+  cards.forEach(function(c){
     c.addEventListener('pointerenter',function(e){
       if(e.pointerType==='touch')return;
       if(window.FlierTour)FlierTour.start(c);
     });
+    c.addEventListener('pointerdown',function(e){            /* a tap on a phone */
+      if(e.pointerType!=='touch')return;
+      if(window.FlierTour&&!FlierTour.busy())FlierTour.start(c);
+    });
   });
+  if(!matchMedia('(pointer:coarse)').matches||!('IntersectionObserver' in window))return;
+  /* phones: a card that scrolls mostly into view gets its turn; cards queue so none is skipped while the flier is busy */
+  var seen=new WeakSet(),pending=[],vis=new WeakSet();
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(en){
+      var c=en.target,i=pending.indexOf(c);
+      if(en.intersectionRatio>=.55){vis.add(c);if(!seen.has(c)&&i<0)pending.push(c);}
+      else{vis.delete(c);if(en.intersectionRatio<.15){seen.delete(c);}if(i>=0)pending.splice(i,1);}
+    });
+  },{threshold:[0,.15,.55]});
+  cards.forEach(function(c){io.observe(c);});
+  setInterval(function(){
+    if(!window.FlierTour||FlierTour.busy()||document.hidden)return;
+    while(pending.length){
+      var c=pending.shift();
+      if(vis.has(c)){seen.add(c);FlierTour.start(c);break;}
+    }
+  },250);
 })();
 /* scroll progress */
 const bar=document.getElementById('progress');
