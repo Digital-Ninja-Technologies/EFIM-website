@@ -524,7 +524,6 @@ html.loading,html.loading body{overflow:hidden}
       <li><a href="#ministries">Ministries</a></li>
       <li><a href="https://efm2026convention.vercel.app/">Convention</a></li>
             <li><a href="#go">Our G.O.</a></li>
-      <li><a href="#pray">Prayer</a></li>
       <li class="m-cta"><a class="btn btn-lamp" href="#visit">Plan a visit <span class="arr">→</span></a></li>
     </ul>
     <a class="btn btn-lamp mag" href="#visit">Plan a visit <span class="arr">→</span></a>
@@ -630,7 +629,6 @@ html.loading,html.loading body{overflow:hidden}
         <p class="bio">Pastor Moses Oyerinde is an influential Nigerian Christian minister, prophetic intercessor and spiritual leader. His mandate is to raise Christ-like achievers across the world, and he is a prominent voice in contemporary Nigerian campus evangelism and prophetic prayer movements.</p>
         <div class="ctas">
           <a class="btn btn-lamp mag" href="https://www.facebook.com/theevangelfaithinternationalmission/" target="_blank" rel="noopener">Hear him preach <span class="arr">→</span></a>
-          <a class="btn btn-ghost mag" href="#pray">Ask for prayer</a>
         </div>
       </div>
     </div>
@@ -709,7 +707,7 @@ html.loading,html.loading body{overflow:hidden}
       <div class="sec-head"><h2>Begin a <em class="s">new life</em></h2><p>Six steps from the Word. Tap each card to reveal its scripture.</p></div>
       <div class="life-grid"><button class="flip" type="button" aria-pressed="false" id="flip0"><div class="in"><div class="f" style="--bg:url(images/gather-bible-study.webp)"><span class="k">01 · KNOW</span><h3>All have sinned</h3><span class="hint">Tap to read the scripture</span></div><div class="b"><p>For all have sinned, and come short of the glory of God.</p><cite>ROMANS 3:23 · KJV</cite></div></div></button><button class="flip" type="button" aria-pressed="false" id="flip1"><div class="in"><div class="f" style="--bg:url(images/life-teaching.webp)"><span class="k">02 · UNDERSTAND</span><h3>The wage and the gift</h3><span class="hint">Tap to read the scripture</span></div><div class="b"><p>For the wages of sin is death; but the gift of God is eternal life through Jesus Christ our Lord.</p><cite>ROMANS 6:23 · KJV</cite></div></div></button><button class="flip" type="button" aria-pressed="false" id="flip2"><div class="in"><div class="f" style="--bg:url(images/gather-prayer.webp)"><span class="k">03 · BELIEVE</span><h3>God so loved</h3><span class="hint">Tap to read the scripture</span></div><div class="b"><p>For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.</p><cite>JOHN 3:16 · KJV</cite></div></div></button><button class="flip" type="button" aria-pressed="false" id="flip3"><div class="in"><div class="f" style="--bg:url(images/gather-sunday.webp)"><span class="k">04 · CONFESS</span><h3>Jesus is Lord</h3><span class="hint">Tap to read the scripture</span></div><div class="b"><p>That if thou shalt confess with thy mouth the Lord Jesus, and shalt believe in thine heart that God hath raised him from the dead, thou shalt be saved.</p><cite>ROMANS 10:9 · KJV</cite></div></div></button><button class="flip" type="button" aria-pressed="false" id="flip4"><div class="in"><div class="f" style="--bg:url(images/step-new-life.webp)"><span class="k">05 · RECEIVE</span><h3>Forgiven</h3><span class="hint">Tap to read the scripture</span></div><div class="b"><p>If we confess our sins, he is faithful and just to forgive us our sins, and to cleanse us from all unrighteousness.</p><cite>1 JOHN 1:9 · KJV</cite></div></div></button><button class="flip" type="button" aria-pressed="false" id="flip5"><div class="in"><div class="f" style="--bg:url(images/step-ministry.webp)"><span class="k">06 · WALK</span><h3>A new creature</h3><span class="hint">Tap to read the scripture</span></div><div class="b"><p>Therefore if any man be in Christ, he is a new creature: old things are passed away; behold, all things are become new.</p><cite>2 CORINTHIANS 5:17 · KJV</cite></div></div></button></div>
       <p class="pray-line">Lord Jesus, I believe you died for me and rose again. I turn from my sin and receive you as my Lord and Saviour. Make me new. Amen.</p>
-      <div class="ctas"><a class="btn btn-lamp mag" href="#pray">I prayed this prayer <span class="arr">→</span></a></div>
+      
     </div>
   </section>
 
@@ -731,31 +729,6 @@ html.loading,html.loading body{overflow:hidden}
 
 
 
-  <section class="band pray" id="pray">
-    <div class="wrap pray-grid">
-      <div>
-        <div class="eyebrow">We'll pray with you</div>
-        <h2 style="font-size:clamp(2.4rem,6vw,4.8rem);font-weight:800;margin-top:16px">Send a prayer <em class="s">request</em></h2>
-        <p style="color:var(--mute);margin-top:20px;max-width:44ch">Share what's on your heart. Every request lights a candle below.</p>
-        <div class="candle" id="candles" aria-hidden="true"></div>
-        <div class="lit" id="litCount">3 candles lit</div>
-      </div>
-      <form id="prayForm" novalidate>
-        <div class="field"><label for="p-name">Your name (optional)</label><input id="p-name" name="name" placeholder="e.g. Adaeze"></div>
-        <div class="field"><label for="p-type">This is a</label>
-          <div class="seg" id="p-type">
-            <input type="radio" name="kind" id="k1" value="Prayer request" checked><label for="k1">Prayer request</label>
-            <input type="radio" name="kind" id="k2" value="Testimony"><label for="k2">Testimony</label>
-            <input type="radio" name="kind" id="k3" value="Thanksgiving"><label for="k3">Thanksgiving</label>
-          </div>
-        </div>
-        <div class="field"><label for="p-msg">Your message</label><textarea id="p-msg" name="msg" placeholder="Write it here…" required></textarea></div>
-        <button class="btn btn-lamp mag" type="submit" style="justify-self:start">Light a candle <span class="arr">→</span></button>
-        <div class="sent" id="sent" hidden></div>
-      </form>
-    </div>
-  </section>
-
 
   <section class="band" id="visit">
     <div class="wrap">
@@ -766,7 +739,7 @@ html.loading,html.loading body{overflow:hidden}
       <div class="visit-grid">
         <div class="vcard"><div class="eyebrow">Location</div><h3>Lagos, Nigeria</h3><p>44, Akintunde Street, Beesam Bus-stop, Mafoluku, Oshodi, Lagos, Nigeria</p><a class="ln" href="https://www.google.com/maps/search/?api=1&query=44%2C+Akintunde+Street%2C+Beesam+Bus-stop%2C+Mafoluku%2C+Oshodi%2C+Lagos%2C+Nigeria" target="_blank" rel="noopener">Open in Maps →</a></div>
         <div class="vcard"><div class="eyebrow">Online</div><h3>Facebook</h3><p>Updates, programmes and live moments from The Evangel Faith Mission.</p><a class="ln" href="https://www.facebook.com/theevangelfaithinternationalmission/" target="_blank" rel="noopener">Visit our Facebook page →</a></div>
-        <div class="vcard"><div class="eyebrow">Contact</div><h3>Call or email</h3><p>Phone and email <span class="tbc">TBC</span></p><a class="ln" href="#pray">Send a message instead →</a></div>
+        <div class="vcard"><div class="eyebrow">Contact</div><h3>Call or email</h3><p>Phone and email <span class="tbc">TBC</span></p></div>
       </div>
     </div>
   </section>
@@ -854,32 +827,6 @@ try{
   label.innerHTML = `${d}, 9:00 AM WAT <span class="tbc">TIME TBC</span>`;
 }catch(e){}
 tick(); setInterval(tick,1000);
-
-/* ---------- prayer form + candles ---------- */
-const candles = document.getElementById('candles');
-let lit = 0;
-function addCandle(){
-  const i = document.createElement('i');
-  i.style.height = (40 + Math.random()*55)+'px';
-  candles.appendChild(i);
-  if(candles.children.length>14) candles.firstElementChild.remove();
-  lit++;
-  document.getElementById('litCount').textContent = lit + (lit===1?' candle lit':' candles lit');
-  if(!reduce && window.gsap) gsap.from(i,{scaleY:0,transformOrigin:'50% 100%',duration:.6,ease:'back.out(2)'});
-}
-for(let k=0;k<3;k++) addCandle();
-document.getElementById('prayForm').addEventListener('submit',e=>{
-  e.preventDefault();
-  const msg = document.getElementById('p-msg');
-  const sent = document.getElementById('sent');
-  if(!msg.value.trim()){sent.hidden=false;sent.textContent='Write your message first, then light the candle.';msg.focus();return;}
-  const name = document.getElementById('p-name').value.trim();
-  const kind = document.querySelector('input[name="kind"]:checked').value;
-  addCandle();
-  sent.hidden=false;
-  sent.textContent = `${kind} received${name? ', '+name:''}. A candle is lit for you. (Demo form — it will reach the prayer team once connected to the church's inbox.)`;
-  msg.value='';
-});
 
 /* ---------- new life flips ---------- */
 document.querySelectorAll('.flip').forEach(b=>b.addEventListener('click',()=>b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')==='true'?'false':'true')));
@@ -1047,7 +994,7 @@ function render(i,animate){
   <div><dt>Service times</dt><dd>${val(b.times,'Sundays, time')}</dd></div>
   <div><dt>Pastor in charge</dt><dd>${val(b.pastor,'Name')}</dd></div>
   <div class="wide"><dt>Phone</dt><dd>${val(b.phone,'Number')}</dd></div></dl>
-  <div class="br-actions"><a class="btn btn-lamp" href="${maps}" target="_blank" rel="noopener">Open in Maps <span class="arr">→</span></a><a class="btn btn-ghost" href="#pray">Send a message</a></div>`;
+  <div class="br-actions"><a class="btn btn-lamp" href="${maps}" target="_blank" rel="noopener">Open in Maps <span class="arr">→</span></a></div>`;
   if(!animate||reduce||!G)return;
   const tl=G.timeline({defaults:{ease:'power3.out'}});
   tl.from(panel.querySelectorAll('.br-city .ch'),{yPercent:115,rotate:6,duration:.7,stagger:.04},0)
